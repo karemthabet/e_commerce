@@ -1,4 +1,4 @@
-import 'package:e_commerce/core/cash/prefs.dart';
+import 'package:e_commerce/core/cashed/prefs.dart';
 import 'package:e_commerce/core/services/service_locator.dart';
 import 'package:e_commerce/core/theme_cubit/theme_cubit.dart';
 import 'package:e_commerce/e_commerce.dart';

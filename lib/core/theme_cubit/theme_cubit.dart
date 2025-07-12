@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../utils/constants/constants.dart';
-import '../cash/prefs.dart';
+import '../cashed/prefs.dart';
 import 'theme_cubit_state.dart';
 
 class ThemeCubit extends Cubit<ThemeCubitState> {
