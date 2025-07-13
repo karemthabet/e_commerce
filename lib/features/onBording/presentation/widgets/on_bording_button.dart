@@ -23,8 +23,8 @@ class OnBoardingButton extends StatelessWidget {
       child: GeneralButton(
        onPressed: () async {
   if (isLastPage) {
-    await Prefs.setSeenOnBoarding(true); // 👈 الأول نحفظ
-    context.go(RoutesName.login);        // 👈 بعدين نروح
+    await Prefs.setSeenOnBoarding(true);
+    context.go(RoutesName.login);
   } else {
     controller.nextPage(
       duration: const Duration(milliseconds: 300),

@@ -1,57 +1,57 @@
 import 'package:flutter/material.dart';
 
-
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
     super.key,
     this.onSaved,
-    this.hitnText,
+    this.hintText,
     this.controller,
     this.textInputType = TextInputType.text,
     this.validator,
     this.suffixIcon,
-    this.maxLines,
-    this.enabled,
   });
-  final String? hitnText;
+
+  final String? hintText;
   final Function(String?)? onSaved;
   final TextEditingController? controller;
   final TextInputType? textInputType;
   final String? Function(String?)? validator;
-  final Widget? suffixIcon;
-  final int? maxLines;
-  final bool? enabled;
+  final IconData? suffixIcon;
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      enabled: enabled,
-      maxLines: maxLines,
-      decoration: InputDecoration(
-        hintText: hitnText,
-        hintStyle: Theme.of(context)
-            .textTheme
-            .titleMedium!
-            .copyWith(color: Colors.grey, fontSize: 14),
-        suffixIcon: suffixIcon,
-        border: Theme.of(context).inputDecorationTheme.border,
-        focusedBorder: Theme.of(context).inputDecorationTheme.focusedBorder,
-        enabledBorder: Theme.of(context).inputDecorationTheme.enabledBorder,
-      ),
-      style: Theme.of(context).textTheme.titleMedium!.copyWith(
-            fontWeight: FontWeight.w500,
-            fontSize: 14,
-          ),
-      cursorColor: Colors.blueGrey,
-      keyboardType: textInputType,
       controller: controller,
+      keyboardType: textInputType,
       validator: validator ??
           (data) {
-            if (data!.isEmpty) {
-              return "Please enter $hitnText";
+            if (data == null || data.isEmpty) {
+              return "Please enter $hintText";
             }
             return null;
           },
       onSaved: onSaved,
+      style: const TextStyle(fontSize: 16),
+      decoration: InputDecoration(
+        hintText: hintText,
+        filled: true,
+        fillColor: Colors.white,
+        prefixIcon: suffixIcon != null
+            ? Icon(suffixIcon, color: Colors.grey.shade500)
+            : null,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: Colors.grey.shade300),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: Colors.grey.shade300),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: Colors.blue.shade400),
+        ),
+      ),
     );
   }
 }

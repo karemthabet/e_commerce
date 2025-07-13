@@ -57,7 +57,7 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
       child: Column(
         spacing: 16,
         children: [
-          CustomTextFormField(controller: nameController, hitnText: "name"),
+          CustomTextFormField(controller: nameController, hintText: "name"),
           CustomTextFormField(
             controller: emailController,
             textInputType: TextInputType.emailAddress,
@@ -70,7 +70,7 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
               }
               return null;
             },
-            hitnText: "Email",
+            hintText: "Email",
           ),
           CustomTextFormField(
             controller: phoneController,
@@ -84,7 +84,7 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
               }
               return null;
             },
-            hitnText: "phone number",
+            hintText: "phone number",
           ),
           PasswordField(controller: passwordController, hintText: "Password"),
           PasswordField(
@@ -97,7 +97,7 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
                 showSnackBarFuction(context, state.errMessage);
               }
               if (state is CreateAccountSuccess) {
-                Navigator.pop(context);
+                context.go(RoutesName.login);
               }
             },
             builder: (context, state) {
@@ -106,23 +106,14 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
               }
               return GeneralButton(
                 text: "Register",
-                backgroundColor: AppColors.primaryColor,
+                backgroundColor: Theme.of(context).primaryColor,
                 textColor: AppColors.whiteColor,
                 onPressed: () {
                   _handleRegisterRequest(context);
                 },
               );
-              
             },
           ),
-        GeneralButton(
-                text: "Already have an account? Login",
-                backgroundColor: AppColors.primaryColor,
-                textColor: AppColors.whiteColor,
-                onPressed: () {
-                  context.go(RoutesName.login);
-                },
-              )
         ],
       ),
     );

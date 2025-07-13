@@ -44,7 +44,7 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
         spacing: 16,
         children: [
           CustomTextFormField(
-            hitnText: "Email",
+            hintText: "Email",
             controller: emailController,
             textInputType: TextInputType.emailAddress,
             validator: (data) {

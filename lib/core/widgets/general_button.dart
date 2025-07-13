@@ -14,27 +14,29 @@ class GeneralButton extends StatelessWidget {
   final Color backgroundColor;
   final Color textColor;
   final VoidCallback? onPressed;
-  final double? height;
+  final double height;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
       height: height,
-      child: TextButton(
-        style: TextButton.styleFrom(
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
           backgroundColor: backgroundColor,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(30),
           ),
         ),
-        onPressed: onPressed,
         child: Text(
           text,
-          style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                color: textColor,
-                fontWeight: FontWeight.w900,
-              ),
-        )
+          style: TextStyle(
+            color: textColor,
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+          ),
+        ),
       ),
     );
   }

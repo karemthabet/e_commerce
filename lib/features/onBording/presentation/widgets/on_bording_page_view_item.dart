@@ -1,5 +1,3 @@
-
-
 import 'package:e_commerce/features/onBording/data/model/on_bording_model.dart';
 import 'package:flutter/material.dart';
 
@@ -8,37 +6,46 @@ class OnBoardingPageItem extends StatelessWidget {
     super.key,
     required this.onBoardingModel,
   });
+
   final OnBoardingModel onBoardingModel;
+
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      physics: const BouncingScrollPhysics(),
+    final size = MediaQuery.of(context).size;
+    final theme = Theme.of(context);
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24.0),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(height: MediaQuery.of(context).size.height * .2),
-          Image.asset(
-            height: 280,
-            onBoardingModel.image,
+          const Spacer(flex: 2),
+          SizedBox(
+            height: size.height * 0.33,
+            child: Image.asset(
+              onBoardingModel.image,
+              fit: BoxFit.contain,
+            ),
           ),
-          const SizedBox(
-            height: 8,
-          ),
+          const SizedBox(height: 30),
           Text(
             onBoardingModel.title,
-            style: Theme.of(context).textTheme.titleLarge,
+            style: theme.textTheme.titleLarge?.copyWith(
+              fontWeight: FontWeight.bold,
+              fontSize: 24,
+            ),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(
-            height: 12,
-          ),
+          const SizedBox(height: 16),
           Text(
             onBoardingModel.subtitle,
-            style: Theme.of(context).textTheme.titleMedium,
+            style: theme.textTheme.bodyMedium?.copyWith(
+              fontSize: 16,
+              color: Colors.grey[700],
+            ),
             textAlign: TextAlign.center,
           ),
-          SizedBox(height: MediaQuery.of(context).size.height * .25),
+          const Spacer(flex: 3),
         ],
       ),
     );

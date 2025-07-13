@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 
-
 class PasswordField extends StatefulWidget {
   const PasswordField({
     super.key,
     this.onSaved,
     this.hintText,
     this.controller,
-    this.textInputType = TextInputType.text,
     this.validator,
   });
+
   final String? hintText;
   final Function(String?)? onSaved;
   final TextEditingController? controller;
-  final TextInputType? textInputType;
   final String? Function(String?)? validator;
 
   @override
@@ -21,51 +19,51 @@ class PasswordField extends StatefulWidget {
 }
 
 class _PasswordFieldState extends State<PasswordField> {
-  bool isPasswordVisible = true;
+  bool isPasswordVisible = false;
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      decoration: InputDecoration(
-        suffixIcon: IconButton(
-          onPressed: () {
-            isPasswordVisible = !isPasswordVisible;
-            setState(() {});
-          },
-          icon: isPasswordVisible
-              ? Icon(
-                  Icons.visibility,
-                  color: Colors.grey.withAlpha(128),
-                )
-              : Icon(
-                  Icons.visibility_off,
-                  color: Colors.grey.withAlpha(128),
-                ),
-        ),
-        hintText: widget.hintText,
-        hintStyle: Theme.of(
-          context,
-        ).textTheme.titleMedium!.copyWith(color: Colors.grey, fontSize: 14),
-        border: Theme.of(context).inputDecorationTheme.border,
-        focusedBorder: Theme.of(context).inputDecorationTheme.focusedBorder,
-        enabledBorder: Theme.of(context).inputDecorationTheme.enabledBorder,
-      ),
-      style: Theme.of(context).textTheme.titleMedium!.copyWith(
-        fontWeight: FontWeight.w500,
-        fontSize: 14,
-      ),
-      cursorColor: Colors.blueGrey,
-      obscureText: isPasswordVisible,
-      keyboardType: widget.textInputType,
       controller: widget.controller,
-      validator:
-          widget.validator ??
+      obscureText: !isPasswordVisible,
+      validator: widget.validator ??
           (data) {
-            if (data!.isEmpty) {
+            if (data == null || data.isEmpty) {
               return "Please enter ${widget.hintText}";
             }
             return null;
           },
       onSaved: widget.onSaved,
+      style: const TextStyle(fontSize: 16),
+      decoration: InputDecoration(
+        hintText: widget.hintText,
+        filled: true,
+        fillColor: Colors.white,
+        prefixIcon: const Icon(Icons.lock_outline, color: Colors.grey),
+        suffixIcon: IconButton(
+          icon: Icon(
+            isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+            color: Colors.grey,
+          ),
+          onPressed: () {
+            setState(() {
+              isPasswordVisible = !isPasswordVisible;
+            });
+          },
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: Colors.grey.shade300),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: Colors.grey.shade300),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: Colors.blue.shade400),
+        ),
+      ),
     );
   }
 }

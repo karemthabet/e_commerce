@@ -14,6 +14,7 @@ class ForgotPasswordView extends StatelessWidget {
     return BlocProvider(
       create: (context) => ForgotPasswordCubit(getIt<AuthRepo>()),
       child: Scaffold(
+
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: SingleChildScrollView(

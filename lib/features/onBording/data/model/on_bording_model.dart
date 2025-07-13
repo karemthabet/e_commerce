@@ -14,21 +14,21 @@ class OnBoardingModel {
 
 List<OnBoardingModel> onBoardingModels = [
   OnBoardingModel(
-    image: AppAssets.imagesLogo,
-    title: 'Save a Life',
+    image: AppAssets.imagesOnbording1,
+    title: 'Shop Smarter',
     subtitle:
-        'Your blood donation can save someone in desperate need. Every drop counts!',
+        'Find what you love quickly with smart search and tailored offers.',
   ),
   OnBoardingModel(
-    image: AppAssets.imagesLogo,
-    title: 'Simple Act, Big Impact',
+    image: AppAssets.imagesOnbording2,
+    title: 'Wide Variety',
     subtitle:
-        'Donating blood is a quick and safe process, but its impact on patients’ lives is huge.',
+        'Explore thousands of products across every category you need.',
   ),
   OnBoardingModel(
-    image: AppAssets.imagesLogo,
-    title: 'Join Our Community',
+    image: AppAssets.imagesOnbording3,
+    title: 'Fast & Easy Delivery',
     subtitle:
-        'Be part of a life saving community! Together, we can make a difference and help those in need.',
+        'Track your orders live and enjoy super-fast doorstep delivery.',
   ),
 ];
