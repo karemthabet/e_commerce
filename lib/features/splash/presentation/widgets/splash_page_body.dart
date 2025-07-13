@@ -1,5 +1,7 @@
 
+import 'package:e_commerce/core/cashed/prefs.dart';
 import 'package:e_commerce/core/utils/app_assets.dart';
+import 'package:e_commerce/core/utils/constants/app_constants.dart';
 import 'package:e_commerce/core/utils/router/routes_name.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -17,12 +19,32 @@ class _SplashPageBodyState extends State<SplashPageBody>
   late Animation<Offset> _slideAnimation;
   late Animation<double> _fadeAnimation;
 
-  @override
-  void initState() {
-    super.initState();
-    initAnimation();
-    navigateToHome();
+@override
+void initState() {
+  super.initState();
+  initAnimation();
+  
+  navigate();
+}
+
+void navigate() async {
+  await Future.delayed(const Duration(seconds: 2));
+
+  if (!mounted) return; // ✅ تحمي الـ context من الاستخدام الخطر
+
+  final hasSeenOnBoarding = Prefs.getBool(AppConstants.seenOnBoarding);
+  final token = Prefs.getString(AppConstants.kToken);
+
+  if (!hasSeenOnBoarding) {
+    context.go(RoutesName.onBoarding);
+  } else if (token == null) {
+    context.go(RoutesName.login);
+  } else {
+    context.go(RoutesName.home);
   }
+}
+
+
 
   @override
   void dispose() {
@@ -44,14 +66,6 @@ class _SplashPageBodyState extends State<SplashPageBody>
         child: Image.asset(AppAssets.imagesLogo),
       ),
     );
-  }
-
-  void navigateToHome() {
-    Future.delayed(const Duration(seconds: 2), () {
-      if (mounted) {
-        context.go(RoutesName.onBoarding);
-      }
-    });
   }
 
   void initAnimation() {

@@ -6,8 +6,9 @@ class OnBordingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: OnBordingPageBody()
+    return const Scaffold(
+      body: OnBoardingPageBody(
+      ),
     );
   }
 }
