@@ -1,7 +1,7 @@
 
 import 'package:dio/dio.dart';
 import 'package:e_commerce/core/cashed/prefs.dart';
-import 'package:e_commerce/core/utils/constants/constants.dart';
+import 'package:e_commerce/core/utils/constants/app_constants.dart';
 
 class AuthInterceptor extends Interceptor {
   final Dio dio;
