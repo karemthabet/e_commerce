@@ -1,5 +1,6 @@
 import 'package:e_commerce/core/utils/router/routes_name.dart';
 import 'package:e_commerce/features/auth/presentation/pages/create_account_page.dart';
+import 'package:e_commerce/features/auth/presentation/pages/forgot_password_page.dart';
 import 'package:e_commerce/features/auth/presentation/pages/login_page.dart';
 import 'package:e_commerce/features/home/presentation/Pages/home_page.dart';
 import 'package:e_commerce/features/onBording/presentation/pages/on_bording_page.dart';
@@ -24,12 +25,18 @@ class AppRouter {
       ),
       GoRoute(
         name: RoutesName.createAnAccount,
+
         path: RoutesName.createAnAccount,
         builder: (context, state) => const CreateAccountPage(),
       ),
       GoRoute(
         path: RoutesName.home,
         builder: (context, state) => const HomePage(),
+      ),
+      GoRoute(
+        name: RoutesName.forgotPassword,
+        path: RoutesName.forgotPassword,
+        builder: (context, state) => const ForgotPasswordPage(),
       ),
     ],
   );

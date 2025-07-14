@@ -1,4 +1,7 @@
+import 'package:e_commerce/core/cashed/prefs.dart';
 import 'package:e_commerce/core/utils/colors/app_colors.dart';
+import 'package:e_commerce/core/utils/constants/app_constants.dart'
+    show AppConstants;
 import 'package:e_commerce/core/utils/router/routes_name.dart';
 import 'package:e_commerce/core/utils/styles/app_styles.dart';
 import 'package:flutter/material.dart';
@@ -47,18 +50,17 @@ class _SplashPageBodyState extends State<SplashPageBody>
     await Future.delayed(const Duration(seconds: 3));
 
     if (!mounted) return;
-    context.go(RoutesName.onBoarding);
 
-    // final hasSeenOnBoarding = Prefs.getBool(AppConstants.seenOnBoarding);
-    // final token = Prefs.getString(AppConstants.kToken);
+    final hasSeenOnBoarding = Prefs.getBool(AppConstants.seenOnBoarding);
+    final token = Prefs.getString(AppConstants.kToken);
 
-    // if (!hasSeenOnBoarding) {
-    //   context.go(RoutesName.onBoarding);
-    // } else if (token == null) {
-    //   context.go(RoutesName.login);
-    // } else {
-    //   context.go(RoutesName.home);
-    // }
+    if (!hasSeenOnBoarding) {
+      context.go(RoutesName.onBoarding);
+    } else if (token == null) {
+      context.go(RoutesName.login);
+    } else {
+      context.go(RoutesName.home);
+    }
   }
 
   @override

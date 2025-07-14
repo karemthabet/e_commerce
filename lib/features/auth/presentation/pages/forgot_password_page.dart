@@ -6,8 +6,8 @@ import '../../../../core/services/setup_service_locator.dart';
 import '../../data/repos/auth_repo.dart';
 import '../widgets/forgot_password_form.dart';
 
-class ForgotPasswordView extends StatelessWidget {
-  const ForgotPasswordView({super.key});
+class ForgotPasswordPage extends StatelessWidget {
+  const ForgotPasswordPage({super.key});
 
   @override
   Widget build(BuildContext context) {

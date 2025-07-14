@@ -7,6 +7,7 @@ import 'package:e_commerce/core/widgets/general_button.dart';
 import 'package:e_commerce/core/widgets/password_field.dart';
 import 'package:e_commerce/features/auth/data/models/create_account_request_model.dart';
 import 'package:e_commerce/features/auth/presentation/cubits/create_account_cubit/create_account_cubit.dart';
+import 'package:e_commerce/features/auth/presentation/widgets/forgot_password_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -91,22 +92,26 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
             controller: confirmPasswordController,
             hintText: "Confirm Password",
           ),
+          const CustomText(text: "Already have an account?"),
           BlocConsumer<CreateAccountCubit, CreateAccountStates>(
             listener: (context, state) {
               if (state is CreateAccountFailure) {
                 showSnackBarFuction(context, state.errMessage);
               }
               if (state is CreateAccountSuccess) {
+                showSnackBarFuction(context, "Account created successfully");
                 context.go(RoutesName.login);
               }
             },
             builder: (context, state) {
               if (state is CreateAccountLoading) {
-                return const CircularProgressIndicator();
+                return const CircularProgressIndicator(
+                  color: AppColors.blueAccentColor,
+                );
               }
               return GeneralButton(
-                text: "Register",
-                backgroundColor: Theme.of(context).primaryColor,
+                text: "Create Account",
+                backgroundColor: AppColors.blueAccentColor,
                 textColor: AppColors.whiteColor,
                 onPressed: () {
                   _handleRegisterRequest(context);
