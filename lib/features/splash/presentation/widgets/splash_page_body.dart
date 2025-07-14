@@ -1,6 +1,6 @@
-import 'package:e_commerce/core/cashed/prefs.dart';
-import 'package:e_commerce/core/utils/constants/app_constants.dart';
+import 'package:e_commerce/core/utils/colors/app_colors.dart';
 import 'package:e_commerce/core/utils/router/routes_name.dart';
+import 'package:e_commerce/core/utils/styles/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -47,17 +47,18 @@ class _SplashPageBodyState extends State<SplashPageBody>
     await Future.delayed(const Duration(seconds: 3));
 
     if (!mounted) return;
+    context.go(RoutesName.onBoarding);
 
-    final hasSeenOnBoarding = Prefs.getBool(AppConstants.seenOnBoarding);
-    final token = Prefs.getString(AppConstants.kToken);
+    // final hasSeenOnBoarding = Prefs.getBool(AppConstants.seenOnBoarding);
+    // final token = Prefs.getString(AppConstants.kToken);
 
-    if (!hasSeenOnBoarding) {
-      context.go(RoutesName.onBoarding);
-    } else if (token == null) {
-      context.go(RoutesName.login);
-    } else {
-      context.go(RoutesName.home);
-    }
+    // if (!hasSeenOnBoarding) {
+    //   context.go(RoutesName.onBoarding);
+    // } else if (token == null) {
+    //   context.go(RoutesName.login);
+    // } else {
+    //   context.go(RoutesName.home);
+    // }
   }
 
   @override
@@ -68,7 +69,6 @@ class _SplashPageBodyState extends State<SplashPageBody>
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -76,8 +76,8 @@ class _SplashPageBodyState extends State<SplashPageBody>
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xFF4A90E2),
-              Color(0xFF50E3C2), 
+              AppColors.splashGradientColor,
+              AppColors.splashGradientColor2,
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -98,25 +98,14 @@ class _SplashPageBodyState extends State<SplashPageBody>
                 const Icon(
                   Icons.shopping_cart_outlined,
                   size: 80,
-                  color: Colors.black,
+                  color: AppColors.blackColor,
                 ),
                 const SizedBox(height: 20),
-                Text(
-                  'Shoppie',
-                  style: theme.textTheme.displaySmall?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                    letterSpacing: 2,
-                  ),
-                ),
+                Text('Shoppie', style: AppStyles.bodyStyle),
                 const SizedBox(height: 10),
-                const Text(
+                Text(
                   'Smart Shopping. Simple Living.',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.black54,
-                    letterSpacing: 0.5,
-                  ),
+                  style: AppStyles.subTitleStyle,
                 ),
               ],
             ),

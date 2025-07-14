@@ -20,7 +20,7 @@ class ForgotPasswordText extends StatelessWidget {
           "forget Password?",
           style: Theme.of(
             context,
-          ).textTheme.bodyMedium!.copyWith(color: AppColors.primaryColor),
+          ).textTheme.bodyMedium!.copyWith(color: AppColors.whiteColor),
         ),
       ),
     );

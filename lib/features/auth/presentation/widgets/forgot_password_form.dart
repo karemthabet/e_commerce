@@ -73,7 +73,7 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
               return GeneralButton(
                 onPressed: () => _handleForgotPassword(context),
                 text: "forget password",
-                backgroundColor: AppColors.primaryColor,
+                backgroundColor: AppColors.whiteColor,
                 textColor: AppColors.whiteColor,
               );
             },
