@@ -1,3 +1,4 @@
+import 'package:e_commerce/core/utils/styles/app_styles.dart';
 import 'package:e_commerce/features/onBording/data/model/on_bording_model.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +13,6 @@ class OnBoardingPageItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final theme = Theme.of(context);
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -30,8 +30,7 @@ class OnBoardingPageItem extends StatelessWidget {
           const SizedBox(height: 30),
           Text(
             onBoardingModel.title,
-            style: theme.textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.bold,
+            style: AppStyles.bodyStyle.copyWith(
               fontSize: 24,
             ),
             textAlign: TextAlign.center,
@@ -39,7 +38,7 @@ class OnBoardingPageItem extends StatelessWidget {
           const SizedBox(height: 16),
           Text(
             onBoardingModel.subtitle,
-            style: theme.textTheme.bodyMedium?.copyWith(
+            style: AppStyles.subTitleStyle.copyWith(
               fontSize: 16,
               color: Colors.grey[700],
             ),

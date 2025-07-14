@@ -1,5 +1,6 @@
 import 'package:e_commerce/core/cashed/prefs.dart';
 import 'package:e_commerce/core/utils/router/routes_name.dart';
+import 'package:e_commerce/core/utils/styles/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -22,9 +23,9 @@ class SkipWidget extends StatelessWidget {
             context.go(RoutesName.login);
           },
           borderRadius: BorderRadius.circular(8),
-          child:  const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text('Skip'),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text('Skip', style: AppStyles.bodyStyle),
           ),
         ),
       ),

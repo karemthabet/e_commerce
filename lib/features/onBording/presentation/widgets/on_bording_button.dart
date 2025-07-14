@@ -1,4 +1,5 @@
 import 'package:e_commerce/core/cashed/prefs.dart';
+import 'package:e_commerce/core/utils/colors/app_colors.dart';
 import 'package:e_commerce/core/utils/router/routes_name.dart';
 import 'package:e_commerce/core/widgets/general_button.dart';
 import 'package:flutter/material.dart';
@@ -34,8 +35,8 @@ class OnBoardingButton extends StatelessWidget {
 },
 
         text: isLastPage ? "Get Started" : 'Next',
-        backgroundColor: Theme.of(context).primaryColor,
-        textColor: Theme.of(context).colorScheme.onPrimary,
+        backgroundColor: AppColors.blueAccentColor,
+        textColor: AppColors.whiteColor,
       ),
     );
   }
