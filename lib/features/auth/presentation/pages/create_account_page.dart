@@ -15,6 +15,7 @@ class CreateAccountPage extends StatelessWidget {
     return BlocProvider(
       create: (context) => CreateAccountCubit(getIt<AuthRepo>()),
       child: const Scaffold(
+       
         backgroundColor: AppColors.whiteColor,
 
         body: CreateAccountPageBody(),

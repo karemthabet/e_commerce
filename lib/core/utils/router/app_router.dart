@@ -2,6 +2,7 @@ import 'package:e_commerce/core/utils/router/routes_name.dart';
 import 'package:e_commerce/features/auth/presentation/pages/create_account_page.dart';
 import 'package:e_commerce/features/auth/presentation/pages/forgot_password_page.dart';
 import 'package:e_commerce/features/auth/presentation/pages/login_page.dart';
+import 'package:e_commerce/features/auth/presentation/pages/verification_code_page.dart';
 import 'package:e_commerce/features/home/presentation/Pages/home_page.dart';
 import 'package:e_commerce/features/onBording/presentation/pages/on_bording_page.dart';
 import 'package:e_commerce/features/splash/presentation/pages/splash_page.dart';
@@ -30,6 +31,7 @@ class AppRouter {
         builder: (context, state) => const CreateAccountPage(),
       ),
       GoRoute(
+        name: RoutesName.home,
         path: RoutesName.home,
         builder: (context, state) => const HomePage(),
       ),
@@ -37,6 +39,11 @@ class AppRouter {
         name: RoutesName.forgotPassword,
         path: RoutesName.forgotPassword,
         builder: (context, state) => const ForgotPasswordPage(),
+      ),
+       GoRoute(
+        name: RoutesName.verficationCode,
+        path: RoutesName.verficationCode,
+        builder: (context, state) => const VerificationCodePage(),
       ),
     ],
   );

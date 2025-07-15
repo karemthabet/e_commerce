@@ -1,13 +1,13 @@
-
 import 'package:e_commerce/core/functions/show_snack_bar_function.dart';
 import 'package:e_commerce/core/utils/colors/app_colors.dart';
 import 'package:e_commerce/core/utils/regx/app_regx.dart';
+import 'package:e_commerce/core/utils/router/routes_name.dart';
 import 'package:e_commerce/core/widgets/custom_text_form_field.dart';
 import 'package:e_commerce/core/widgets/general_button.dart';
 import 'package:e_commerce/features/auth/presentation/cubits/forgot_password_cubit/forgot_password_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:go_router/go_router.dart';
 
 import '../cubits/forgot_password_cubit/forgot_password_states.dart';
 
@@ -60,20 +60,30 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
           BlocConsumer<ForgotPasswordCubit, ForgotPasswordStates>(
             listener: (context, state) {
               if (state is ForgotPasswordFailure) {
-                showSnackBarFuction(context, state.errMessage);
+                showSnackBarFuction(context, state.errMessage, isError: true);
               }
               if (state is ForgotPasswordSuccess) {
-                showSnackBarFuction(context, "check your email");
+                showSnackBarFuction(
+                  context,
+                  "check your email",
+                  isError: false,
+                ).then((_) {
+                  if (context.mounted) {
+                    context.push(RoutesName.verficationCode);
+                  }
+                });
               }
             },
             builder: (context, state) {
               if (state is ForgotPasswordLoading) {
-                return const CircularProgressIndicator();
+                return const CircularProgressIndicator(
+                  color: AppColors.blueAccentColor,
+                );
               }
               return GeneralButton(
                 onPressed: () => _handleForgotPassword(context),
-                text: "forget password",
-                backgroundColor: AppColors.whiteColor,
+                text: "Send",
+                backgroundColor: AppColors.blueAccentColor,
                 textColor: AppColors.whiteColor,
               );
             },

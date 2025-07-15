@@ -1,22 +1,22 @@
 import 'package:e_commerce/core/utils/styles/app_styles.dart';
-import 'package:e_commerce/features/auth/presentation/widgets/create_account_form.dart';
+import 'package:e_commerce/features/auth/presentation/widgets/forgot_password_form.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class CreateAccountPageBody extends StatelessWidget {
-  const CreateAccountPageBody({super.key});
+class ForgotPasswordBody extends StatelessWidget {
+  const ForgotPasswordBody({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       child: SingleChildScrollView(
         reverse: true,
         physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
             const SizedBox(height: 50),
-
+            
             Align(
               alignment: Alignment.centerLeft,
               child: IconButton(
@@ -29,16 +29,33 @@ class CreateAccountPageBody extends StatelessWidget {
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                "Create Account",
+                "Forgot Password",
                 style: AppStyles.bodyStyle.copyWith(
-                  fontSize: 25,
+                  fontSize: 30,
                   fontWeight: FontWeight.w700,
                 ),
               ),
             ),
             const SizedBox(height: 30),
-            const CreateAccountForm(),
-            const SizedBox(height: 16),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'please enter your email address to receive a link to reset your password.',
+                    textAlign: TextAlign.center,
+                    style: AppStyles.subTitleStyle.copyWith(
+                      color: Colors.grey.shade600,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 32),
+            const ForgotPasswordForm(),
+
+            const SizedBox(height: 24),
           ],
         ),
       ),

@@ -16,7 +16,9 @@ class HomePage extends StatelessWidget {
             onPressed: () async {
               await Prefs.removeData(key: AppConstants.kToken);
               await Prefs.setBool(AppConstants.isLoggedIn, false);
-              context.go(RoutesName.login);
+              if (context.mounted) {
+                context.go(RoutesName.login);
+              }
             },
             icon: const Icon(Icons.logout_sharp),
           ),

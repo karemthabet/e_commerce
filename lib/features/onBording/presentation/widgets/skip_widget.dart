@@ -20,7 +20,9 @@ class SkipWidget extends StatelessWidget {
         child: InkWell(
           onTap: () async {
             await Prefs.setSeenOnBoarding(true);
-            context.go(RoutesName.login);
+            if (context.mounted) {
+              context.go(RoutesName.login);
+            }
           },
           borderRadius: BorderRadius.circular(8),
           child: Padding(

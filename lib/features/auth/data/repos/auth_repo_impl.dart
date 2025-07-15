@@ -20,10 +20,12 @@ class AuthRepoImpl implements AuthRepo {
     required CreateAccountRequestModel createAccountRequestModel,
   }) async {
     try {
-      await apiService.post(
+   final result=   await apiService.post(
         EndPoints.register,
         data: createAccountRequestModel.toJson(),
       );
+       final String token = result['token'];
+      Prefs.setString(AppConstants.kToken, token);
       return const Right(null);
     } on CustomException catch (e) {
       return left((ServerFailure(errMessage: e.message)));

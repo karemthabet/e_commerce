@@ -27,11 +27,12 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
       nameController,
       phoneController,
       confirmPasswordController;
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
 
   @override
-  initState() {
+  void initState() {
     emailController = TextEditingController();
     passwordController = TextEditingController();
     nameController = TextEditingController();
@@ -96,11 +97,19 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
           BlocConsumer<CreateAccountCubit, CreateAccountStates>(
             listener: (context, state) {
               if (state is CreateAccountFailure) {
-                showSnackBarFuction(context, state.errMessage);
+                showSnackBarFuction(context, state.errMessage, isError: true);
               }
+
               if (state is CreateAccountSuccess) {
-                showSnackBarFuction(context, "Account created successfully");
-                context.go(RoutesName.login);
+                showSnackBarFuction(
+                  context,
+                  "Account created successfully",
+                  isError: false,
+                ).then((_) {
+                  if (context.mounted) {
+                    context.go(RoutesName.home);
+                  }
+                });
               }
             },
             builder: (context, state) {
@@ -139,7 +148,7 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
           createAccountRequestModel: createAccountRequestModel,
         );
       } else {
-        showSnackBarFuction(context, "password doesn't match");
+        showSnackBarFuction(context, "password doesn't match", isError: true);
       }
     } else {
       setState(() {

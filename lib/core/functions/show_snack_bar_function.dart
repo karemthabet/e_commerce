@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-void showSnackBarFuction(BuildContext context, String text, {bool isError = false}) {
+Future<void> showSnackBarFuction(BuildContext context, String text, {required bool isError}) {
   final color = isError ? Colors.redAccent : Colors.green;
 
-  ScaffoldMessenger.of(context).clearSnackBars(); // ✅ عشان ميحصلش تراكُم
+  ScaffoldMessenger.of(context).clearSnackBars();
 
-  ScaffoldMessenger.of(context).showSnackBar(
+  return ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
-      duration: const Duration(seconds: 1),
+      duration: const Duration(seconds: 1), // أقل وقت ممكن
       backgroundColor: Colors.transparent,
       elevation: 0,
       behavior: SnackBarBehavior.floating,
@@ -38,5 +38,5 @@ void showSnackBarFuction(BuildContext context, String text, {bool isError = fals
         ),
       ),
     ),
-  );
+  ).closed;
 }

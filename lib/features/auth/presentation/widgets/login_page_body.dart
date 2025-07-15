@@ -1,5 +1,5 @@
 import 'package:e_commerce/core/utils/styles/app_styles.dart' show AppStyles;
-import 'package:e_commerce/features/auth/presentation/widgets/dont_have_an_account.dart';
+import 'package:e_commerce/features/auth/presentation/widgets/custom_rich_text.dart';
 import 'package:e_commerce/features/auth/presentation/widgets/login_form.dart';
 import 'package:flutter/material.dart';
 
@@ -52,9 +52,9 @@ class LoginPageBody extends StatelessWidget {
             const SizedBox(height: 32),
             const LoginForm(),
             const SizedBox(height: 24),
-            const DontHaveAccount(
+            const CustomRichText(
               normalText: 'Don\'t have an account?',
-              highlightedTextWithonTap: ' Sign Up',
+              highlightedTextWithonTap: 'Sign Up',
             ),
           ],
         ),

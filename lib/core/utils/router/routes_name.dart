@@ -5,4 +5,5 @@ class RoutesName {
   static const String login = '/login';
   static const String forgotPassword = '/forgotPassword';
   static const String home = '/home';
+  static const String verficationCode = '/verficationCode';
 }

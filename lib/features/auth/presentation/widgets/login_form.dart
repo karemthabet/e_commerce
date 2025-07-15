@@ -56,20 +56,24 @@ class _LoginFormState extends State<LoginForm> {
             },
           ),
           const SizedBox(height: 16),
-          PasswordField(
-            controller: passwordController,
-            hintText: "Password",
-          ),
+          PasswordField(controller: passwordController, hintText: "Password"),
           const SizedBox(height: 20),
-          const CustomText(text: "Forgot Password?",),
+          const CustomText(text: "Forgot Password?"),
           const SizedBox(height: 20),
           BlocConsumer<LoginCubit, LoginStates>(
             listener: (context, state) {
               if (state is LoginFailure) {
-                showSnackBarFuction(context, state.errMessage);
+                showSnackBarFuction(context, state.errMessage, isError: true);
               } else if (state is LoginSuccess) {
-                showSnackBarFuction(context, "Login successfully");
-                context.go(RoutesName.home);
+                showSnackBarFuction(
+                  context,
+                  "Login successfully",
+                  isError: false,
+                ).then((_) {
+                  if (context.mounted) {
+                    context.go(RoutesName.home);
+                  }
+                });
               }
             },
             builder: (context, state) {

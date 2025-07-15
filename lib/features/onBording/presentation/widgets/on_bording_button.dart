@@ -22,17 +22,19 @@ class OnBoardingButton extends StatelessWidget {
       right: 10,
       left: 10,
       child: GeneralButton(
-       onPressed: () async {
-  if (isLastPage) {
-    await Prefs.setSeenOnBoarding(true);
-    context.go(RoutesName.login);
-  } else {
-    controller.nextPage(
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.linear,
-    );
-  }
-},
+        onPressed: () async {
+          if (isLastPage) {
+            await Prefs.setSeenOnBoarding(true);
+            if (context.mounted) {
+              context.go(RoutesName.login);
+            }
+          } else {
+            controller.nextPage(
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.linear,
+            );
+          }
+        },
 
         text: isLastPage ? "Get Started" : 'Next',
         backgroundColor: AppColors.blueAccentColor,
