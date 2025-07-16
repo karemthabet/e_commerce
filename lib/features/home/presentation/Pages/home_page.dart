@@ -29,7 +29,7 @@
 //   }
 // }
 import 'package:e_commerce/features/home/presentation/Pages/widgets/custom_bottom_nav_bar.dart';
-import 'package:e_commerce/features/home/presentation/Pages/widgets/home_view_body.dart';
+import 'package:e_commerce/features/home/presentation/Pages/widgets/home_page_body.dart';
 import 'package:e_commerce/features/products/presentation/pages/product_view.dart';
 import 'package:flutter/material.dart';
 
@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
   int currentIndex = 0;
 
   final List<Widget> screens = [
-    const HomeViewBody(),
+    const HomePagesBody(),
 const ProductView(),
     const Center(child: Text("Favorites")),
     const Center(child: Text("Profile")),

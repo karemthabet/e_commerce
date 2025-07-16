@@ -8,8 +8,8 @@ import 'package:e_commerce/features/home/presentation/cubits/cubit_category/cate
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HomeViewBody extends StatelessWidget {
-  const HomeViewBody({super.key});
+class HomePagesBody extends StatelessWidget {
+  const HomePagesBody({super.key});
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
@@ -134,7 +134,7 @@ class HomeViewBody extends StatelessWidget {
                       );
                     } else {
                       return const CustomListViewCardShimmer(itemCount: 10);
-                      ;
+                      
                     }
                   },
                 ),

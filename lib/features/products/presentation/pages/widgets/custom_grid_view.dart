@@ -31,10 +31,12 @@ class CustomProductGridView extends StatelessWidget {
             }),
           );
         } else if (state is ProductsFailure) {
-          return Center(
-            child: Text(
-              state.errorMessage,
-              style: const TextStyle(color: AppColors.pink),
+          return SliverToBoxAdapter(
+            child: Center(
+              child: Text(
+                state.errorMessage,
+                style: const TextStyle(color: AppColors.pink),
+              ),
             ),
           );
         } else {
