@@ -3,6 +3,7 @@ import 'package:e_commerce/core/utils/colors/app_colors.dart';
 import 'package:e_commerce/core/utils/router/routes_name.dart';
 import 'package:e_commerce/core/utils/styles/app_styles.dart';
 import 'package:e_commerce/features/products/data/models/product_model.dart';
+import 'package:e_commerce/features/products/presentation/pages/widgets/custom_favorite.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -49,16 +50,7 @@ class CustomProductCardInfo extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                   ),
-                   Positioned(
-                    top: 8,
-                    right: 8,
-                    child: CircleAvatar(
-                      backgroundColor: AppColors.whiteColor,
-                      radius: 16,
-                      child: IconButton(icon: const Icon(Icons.favorite_border,
-                          size: 18, color: AppColors.greyColor),onPressed: (){},),
-                    ),
-                  ),
+                   const CustomFavorite(),
                 ],
               ),
               Padding(

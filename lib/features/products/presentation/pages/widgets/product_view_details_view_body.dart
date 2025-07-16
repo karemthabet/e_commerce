@@ -4,6 +4,7 @@ import 'package:e_commerce/core/utils/styles/app_styles.dart';
 import 'package:e_commerce/core/widgets/custom_cursor.dart';
 import 'package:e_commerce/features/products/data/models/product_model.dart';
 import 'package:e_commerce/features/products/presentation/pages/widgets/colors_dot.dart';
+import 'package:e_commerce/features/products/presentation/pages/widgets/custom_favorite.dart';
 import 'package:flutter/material.dart';
 
 class ProductDetailsViewBody extends StatefulWidget {
@@ -46,15 +47,7 @@ class _ProductDetailsViewBodyState extends State<ProductDetailsViewBody> {
                         images: List<String>.from(widget.product.images!),
                         isNetwork: true,
                       )),
-                  const Positioned(
-                    top: 8,
-                    right: 8,
-                    child: CircleAvatar(
-                      backgroundColor: AppColors.whiteColor,
-                      child: Icon(Icons.favorite_border,
-                          color: AppColors.greyColor),
-                    ),
-                  ),
+                  const CustomFavorite(),
                 ],
               ),
               const SizedBox(height: 16),
