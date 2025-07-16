@@ -34,7 +34,7 @@ class CreateAccountPage extends StatelessWidget {
             reverse: true,
             physics: BouncingScrollPhysics(),
             child: Column(
-              spacing: 16,
+              // spacing: 16,
               children: [
                 SizedBox(height: 30),
                 CreateAccountForm(),

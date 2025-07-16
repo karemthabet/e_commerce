@@ -8,5 +8,9 @@ class AppAssets {
 
   static const String imagesOnbording3 = "assets/images/on bording 3.png";
 
+  static const String sliderImageOne ='assets/images/Property 1=Variant3.png';
+  static const String sliderImageTwo='assets/images/Property 1=Variant2.png';
+  static const String sliderImageThree ='assets/images/Property 1=Default.png';
+
 }
 

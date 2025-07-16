@@ -55,7 +55,7 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
       key: formKey,
       autovalidateMode: autovalidateMode,
       child: Column(
-        spacing: 16,
+        // spacing: 16,
         children: [
           CustomTextFormField(controller: nameController, hintText: "name"),
           CustomTextFormField(

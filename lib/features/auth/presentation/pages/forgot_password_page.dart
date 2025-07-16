@@ -21,7 +21,7 @@ class ForgotPasswordView extends StatelessWidget {
             reverse: true,
             physics: const BouncingScrollPhysics(),
             child: Column(
-              spacing: 16,
+              // spacing: 16,
               children: [
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.25,
