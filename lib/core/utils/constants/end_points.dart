@@ -5,4 +5,8 @@ abstract class EndPoints {
   static const String forgotPassword = "auth/forgotPasswords";
   static const String verifyCode = "auth/verifyResetCode";
   static const String resetPassword = "auth/resetPassword";
+  static const String categories = "categories";
+  static const String brands = "brands";
+  static const String products = "products";
+
 }
