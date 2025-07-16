@@ -1,6 +1,6 @@
-
 import 'package:dio/dio.dart';
-import 'package:e_commerce/core/cashed/category_or_brans_service.dart';
+import 'package:e_commerce/core/cashed/brand_service.dart';
+import 'package:e_commerce/core/cashed/category_service.dart';
 import 'package:e_commerce/core/cashed/hive_product_services.dart';
 import 'package:e_commerce/features/auth/data/repos/auth_repo.dart';
 import 'package:e_commerce/features/auth/data/repos/auth_repo_impl.dart';
@@ -22,17 +22,25 @@ final getIt = GetIt.instance;
 void setupServiceLocator() {
   getIt.registerSingleton<Dio>(Dio());
   getIt.registerSingleton<ApiService>(DioConsumer(dio: getIt<Dio>()));
-  getIt.registerLazySingleton<ProductsHiveService>(()=>ProductsHiveService());
-  getIt.registerLazySingleton<CategoryOrBrandHiveService>(()=>CategoryOrBrandHiveService());
+  getIt.registerLazySingleton<ProductsHiveService>(() => ProductsHiveService());
+  getIt.registerLazySingleton<CategoryHiveService>(
+      () => CategoryHiveService());
 
-  getIt.registerLazySingleton<CategoryRepo>(()=>CategoryRepoImpl(apiService: getIt.get<ApiService>(),hiveService: getIt.get<CategoryOrBrandHiveService>()));
-    
-    getIt.registerLazySingleton<BrandRepo>(()=>BrandRepoImpl(apiService: getIt.get<ApiService>(), hiveService: getIt.get<CategoryOrBrandHiveService>() ));
-    getIt.registerLazySingleton<ProductRepo>(()=>ProductRepoImpl(apiService: getIt.get<ApiService>(), hiveService: getIt.get<ProductsHiveService>()));
-  getIt.registerFactory(()=>ProductsCubit(getIt.get<ProductRepo>()));
+  getIt.registerLazySingleton<CategoryRepo>(() => CategoryRepoImpl(
+      apiService: getIt.get<ApiService>(),
+      hiveService: getIt.get<CategoryHiveService>()));
 
-  getIt.registerFactory(()=>CategoryCubit(getIt.get<CategoryRepo>()));
-    getIt.registerFactory(()=>BrandCubit(getIt.get<BrandRepo>()));
+  getIt.registerLazySingleton<BrandRepo>(() => BrandRepoImpl(
+      apiService: getIt.get<ApiService>(),
+      hiveService: getIt.get<BrandHiveService>()));
+  getIt.registerLazySingleton<ProductRepo>(() => ProductRepoImpl(
+      apiService: getIt.get<ApiService>(),
+      hiveService: getIt.get<ProductsHiveService>()));
+  getIt.registerFactory(() => ProductsCubit(getIt.get<ProductRepo>()));
+
+  getIt.registerFactory(() => CategoryCubit(getIt.get<CategoryRepo>()));
+  getIt.registerFactory(() => BrandCubit(getIt.get<BrandRepo>()));
+  getIt.registerLazySingleton<BrandHiveService>(()=>BrandHiveService());
 
   getIt.registerSingleton<AuthRepo>(
     AuthRepoImpl(apiService: getIt<ApiService>()),

@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:e_commerce/core/cashed/category_or_brans_service.dart';
+import 'package:e_commerce/core/cashed/brand_service.dart';
 import 'package:e_commerce/core/errors/exception.dart';
 import 'package:e_commerce/core/errors/failure.dart';
 import 'package:e_commerce/core/services/api_service.dart';
@@ -9,7 +9,7 @@ import 'package:e_commerce/features/home/data/repos/brand_repo.dart';
 
 class BrandRepoImpl  extends BrandRepo{
       final ApiService apiService;
-    final CategoryOrBrandHiveService hiveService;
+    final BrandHiveService hiveService;
 
   BrandRepoImpl({required this.apiService,required this.hiveService, });
 
@@ -23,11 +23,11 @@ try {
           .map((e) => CategoryDataOrBrands.fromJson(e))
           .toList();
 
-      await hiveService.cacheProducts(dataList);
+      await hiveService.casheBrand(dataList);
 
       return right(dataList);
     } on CustomException catch (e) {
-      final cached = hiveService.getCachedProducts();
+      final cached = hiveService.getCashedBrands();
 
       if (cached.isNotEmpty) {
         return right(cached);

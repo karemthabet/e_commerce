@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_commerce/core/utils/colors/app_colors.dart';
 import 'package:e_commerce/core/utils/router/routes_name.dart';
+import 'package:e_commerce/core/utils/styles/app_styles.dart';
 import 'package:e_commerce/features/products/data/models/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -27,7 +28,7 @@ class CustomProductCardInfo extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.2),
+                color: AppColors.greyColor.withOpacity(0.2),
                 blurRadius: 5,
                 offset: const Offset(0, 3),
               ),
@@ -64,8 +65,7 @@ class CustomProductCardInfo extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 child: Text(
                   product.title!,
-                  style:
-                      const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                  style:AppStyles.text16,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -74,7 +74,7 @@ class CustomProductCardInfo extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: Text(
                   product.description!,
-                  style: const TextStyle(fontSize: 12, color: Colors.grey),
+                  style: AppStyles.text15.copyWith(fontSize: 12, color: AppColors.greyColor),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -82,20 +82,16 @@ class CustomProductCardInfo extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 child: Text("${product.price.toString()} EGP",
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                      fontSize: 14,
-                    )),
+                    style: AppStyles.text15),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: Row(
                   children: [
                     Text("Review(${product.ratingsAverage.toString()})",
-                        style: const TextStyle(fontSize: 18)),
+                        style: AppStyles.text16.copyWith(fontWeight: FontWeight.w100)),
                     const SizedBox(width: 4),
-                    const Icon(Icons.star, size: 18, color: Colors.amber),
+                     const Icon(Icons.star, size: 18, color: AppColors.yellow),
                     const Spacer(),
                     CircleAvatar(
                       backgroundColor: const Color.fromRGBO(35, 84, 100, 1),
