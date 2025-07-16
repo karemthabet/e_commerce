@@ -42,7 +42,6 @@ class _ResetPasswordFormState extends State<ResetPasswordForm> {
       key: formKey,
       autovalidateMode: autovalidateMode,
       child: Column(
-        spacing: 16,
         children: [
           PasswordField(
             hintText: "new Password",
