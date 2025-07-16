@@ -9,7 +9,6 @@ class ProductsCubit extends Cubit<ProductsState> {
   ProductsCubit(this.productRepo) : super(ProductsInitial());
   ProductRepo productRepo;
   Future<void>getProducts()async{
-    print("STATE: $state");
 
 final result=await productRepo.fetchProducts();
 result.fold((fail)=>emit(ProductsFailure(errorMessage: fail.errMessage)), (products)=>emit(ProductsSuccess(products)));

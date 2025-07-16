@@ -7,7 +7,6 @@ import 'package:e_commerce/features/home/presentation/cubits/cubit_brand/brand_c
 import 'package:e_commerce/features/home/presentation/cubits/cubit_category/category_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 class HomePagesBody extends StatelessWidget {
   const HomePagesBody({super.key});
   @override
@@ -37,7 +36,9 @@ class HomePagesBody extends StatelessWidget {
                         color: AppColors.bluedark,
                         size: 40,
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+
+                      },
                     )
                   ],
                 ),
@@ -84,10 +85,12 @@ class HomePagesBody extends StatelessWidget {
                         ],
                       );
                     } else if (state is CategoryFailure) {
-                      return Center(
-                        child: Text(
-                          state.errorMessage,
-                          style: const TextStyle(color: AppColors.pink),
+                      return SliverToBoxAdapter(
+                        child: Center(
+                          child: Text(
+                            state.errorMessage,
+                            style: const TextStyle(color: AppColors.pink),
+                          ),
                         ),
                       );
                     } else {
@@ -126,10 +129,12 @@ class HomePagesBody extends StatelessWidget {
                         ],
                       );
                     } else if (state is BrandFailure) {
-                      return Center(
-                        child: Text(
-                          state.errorMessage,
-                          style: const TextStyle(color: AppColors.pink),
+                      return SliverToBoxAdapter(
+                        child: Center(
+                          child: Text(
+                            state.errorMessage,
+                            style: const TextStyle(color: AppColors.pink),
+                          ),
                         ),
                       );
                     } else {

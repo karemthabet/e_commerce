@@ -39,6 +39,7 @@ try {
       return left(ServerFailure(errMessage: e.message));
     }
   }
+    @override
     Future<Either<Failure, List<CategoryDataOrBrands>>> fetchCategory() async{
 
 
