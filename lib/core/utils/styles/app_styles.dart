@@ -3,16 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppStyles {
-  static TextStyle subTitleStyle = const TextStyle(
-    fontSize: 14,
-    color: AppColors.blackColor,
-    letterSpacing: 0.5,
-  );
-
-  static TextStyle bodyStyle = const TextStyle(
-    fontWeight: FontWeight.bold,
-    color: AppColors.blackColor,
-    letterSpacing: 2,
   static final TextStyle _baseStyle = GoogleFonts.poppins(
     color: AppColors.bluedark,
   );
