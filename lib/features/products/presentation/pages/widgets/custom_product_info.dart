@@ -18,7 +18,7 @@ class CustomProductCardInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        GoRouter.of(context).push(RoutesName.productDetails,extra: product);
+        GoRouter.of(context).push(RoutesName.productDetails, extra: product);
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -29,7 +29,7 @@ class CustomProductCardInfo extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
             boxShadow: [
               BoxShadow(
-                color: AppColors.greyColor.withOpacity(0.2),
+                color: AppColors.greyColor.withValues(alpha: .1),
                 blurRadius: 5,
                 offset: const Offset(0, 3),
               ),
@@ -48,16 +48,26 @@ class CustomProductCardInfo extends StatelessWidget {
                       height: 100,
                       width: double.infinity,
                       fit: BoxFit.cover,
+                      placeholder: (context, url) => Container(
+                        height: 100,
+                        color: Colors.grey[200],
+                        child: const Center(child: CircularProgressIndicator()),
+                      ),
+                      errorWidget: (context, url, error) => const Icon(
+                    size: 60,
+                    Icons.broken_image,
+                    color: Colors.red,
+                  ),
                     ),
                   ),
-                   const CustomFavorite(),
+                  const CustomFavorite(),
                 ],
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 child: Text(
                   product.title!,
-                  style:AppStyles.text16,
+                  style: AppStyles.text16,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -66,7 +76,8 @@ class CustomProductCardInfo extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: Text(
                   product.description!,
-                  style: AppStyles.text15.copyWith(fontSize: 12, color: AppColors.greyColor),
+                  style: AppStyles.text15
+                      .copyWith(fontSize: 12, color: AppColors.greyColor),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -81,9 +92,10 @@ class CustomProductCardInfo extends StatelessWidget {
                 child: Row(
                   children: [
                     Text("Review(${product.ratingsAverage.toString()})",
-                        style: AppStyles.text16.copyWith(fontWeight: FontWeight.w100)),
+                        style: AppStyles.text16
+                            .copyWith(fontWeight: FontWeight.w100)),
                     const SizedBox(width: 4),
-                     const Icon(Icons.star, size: 18, color: AppColors.yellow),
+                    const Icon(Icons.star, size: 18, color: AppColors.yellow),
                     const Spacer(),
                     CircleAvatar(
                       backgroundColor: const Color.fromRGBO(35, 84, 100, 1),

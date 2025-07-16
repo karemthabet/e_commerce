@@ -41,6 +41,7 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
       key: formKey,
       autovalidateMode: autovalidateMode,
       child: Column(
+        spacing: 16,
         children: [
           CustomTextFormField(
             hintText: "Email",

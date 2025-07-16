@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
-import 'package:e_commerce/core/cashed/brand_service.dart';
-import 'package:e_commerce/core/cashed/category_service.dart';
-import 'package:e_commerce/core/cashed/hive_product_services.dart';
+import 'package:e_commerce/core/cache/brand_service.dart';
+import 'package:e_commerce/core/cache/category_service.dart';
+import 'package:e_commerce/core/cache/hive_product_services.dart';
 import 'package:e_commerce/features/auth/data/repos/auth_repo.dart';
 import 'package:e_commerce/features/auth/data/repos/auth_repo_impl.dart';
-import 'package:e_commerce/features/home/data/repos/home_repo/home_repo.dart';
-import 'package:e_commerce/features/home/data/repos/home_repo_impl/home_repo_impl.dart';
+import 'package:e_commerce/features/home/data/repos/home_repo.dart';
+import 'package:e_commerce/features/home/data/repos/home_repo_impl.dart';
 import 'package:e_commerce/features/home/presentation/cubits/cubit_brand/brand_cubit.dart';
 import 'package:e_commerce/features/home/presentation/cubits/cubit_category/category_cubit.dart';
 import 'package:e_commerce/features/products/data/repos/product_repo.dart';

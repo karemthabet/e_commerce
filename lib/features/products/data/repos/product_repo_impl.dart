@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:e_commerce/core/cashed/hive_product_services.dart';
+import 'package:e_commerce/core/cache/hive_product_services.dart';
 import 'package:e_commerce/core/errors/exception.dart';
 import 'package:e_commerce/core/errors/failure.dart';
 import 'package:e_commerce/core/services/api_service.dart';

@@ -2,8 +2,8 @@ import 'package:e_commerce/core/utils/colors/app_colors.dart';
 import 'package:e_commerce/features/products/presentation/pages/widgets/custom_grid_view.dart';
 import 'package:flutter/material.dart';
 
-class ProductViewBody extends StatelessWidget {
-  const ProductViewBody({super.key});
+class ProductPageBody extends StatelessWidget {
+  const ProductPageBody({super.key});
 
   @override
   Widget build(BuildContext context) {

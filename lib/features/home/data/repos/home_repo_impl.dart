@@ -1,12 +1,13 @@
 import 'package:dartz/dartz.dart';
-import 'package:e_commerce/core/cashed/brand_service.dart';
-import 'package:e_commerce/core/cashed/category_service.dart';
+import 'package:e_commerce/core/cache/brand_service.dart';
+import 'package:e_commerce/core/cache/category_service.dart';
+
 import 'package:e_commerce/core/errors/exception.dart';
 import 'package:e_commerce/core/errors/failure.dart';
 import 'package:e_commerce/core/services/api_service.dart';
 import 'package:e_commerce/core/utils/constants/end_points.dart';
 import 'package:e_commerce/features/home/data/models/categories_or_brand_model.dart';
-import 'package:e_commerce/features/home/data/repos/home_repo/home_repo.dart';
+import 'package:e_commerce/features/home/data/repos/home_repo.dart';
 
 class HomeRepoImpl  extends HomeRepo{
       final ApiService apiService;

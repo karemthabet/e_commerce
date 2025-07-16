@@ -27,4 +27,15 @@ class AppStyles {
     padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 14),
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
   );
+  static TextStyle subTitleStyle = const TextStyle(
+    fontSize: 14,
+    color: AppColors.blackColor,
+    letterSpacing: 0.5,
+  );
+
+  static TextStyle bodyStyle = const TextStyle(
+    fontWeight: FontWeight.bold,
+    color: AppColors.blackColor,
+    letterSpacing: 2,
+  );
 }

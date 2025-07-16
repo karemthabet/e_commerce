@@ -41,8 +41,11 @@ class _ResetPasswordFormState extends State<ResetPasswordForm> {
     return Form(
       key: formKey,
       autovalidateMode: autovalidateMode,
-      child: Column(
+      child: Column
+      (
+        spacing:16,
         children: [
+        
           PasswordField(
             hintText: "new Password",
             controller: newPasswordController,

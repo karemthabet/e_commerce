@@ -1,7 +1,8 @@
-import 'package:e_commerce/core/cashed/brand_service.dart';
-import 'package:e_commerce/core/cashed/category_service.dart';
-import 'package:e_commerce/core/cashed/hive_product_services.dart';
-import 'package:e_commerce/core/cashed/prefs.dart';
+
+import 'package:e_commerce/core/cache/brand_service.dart';
+import 'package:e_commerce/core/cache/category_service.dart';
+import 'package:e_commerce/core/cache/hive_product_services.dart';
+import 'package:e_commerce/core/cache/prefs.dart';
 import 'package:e_commerce/core/services/setup_service_locator.dart';
 import 'package:e_commerce/e_commerce.dart';
 import 'package:e_commerce/features/home/data/models/categories_or_brand_model.dart';
@@ -24,5 +25,7 @@ void main() async {
   await Hive.openBox<CategoryDataOrBrands>(BrandHiveService.boxBrand);
   await Prefs.init();
   setupServiceLocator();
+  //hide status bar
+  
   runApp(const ECommerceApp());
 }

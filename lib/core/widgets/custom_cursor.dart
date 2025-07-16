@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:e_commerce/core/utils/colors/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomCarouselSlider extends StatelessWidget {
@@ -21,7 +22,18 @@ class CustomCarouselSlider extends StatelessWidget {
                 imageUrl: image,
                 fit: BoxFit.cover,
                 width: double.infinity,
-              )
+                placeholder: (context, url) => const Center(
+                      child: CircularProgressIndicator(
+                        color: AppColors.blueAccentColor,
+                      ),
+                    ),
+                errorWidget: (context, url, error) {
+                  return const Icon(
+                    size: 140,
+                    Icons.broken_image,
+                    color: Colors.red,
+                  );
+                })
             : Image.asset(
                 image,
                 fit: BoxFit.cover,

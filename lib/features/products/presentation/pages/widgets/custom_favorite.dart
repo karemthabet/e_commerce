@@ -15,8 +15,8 @@ class CustomFavorite extends StatelessWidget {
      child: CircleAvatar(
        backgroundColor: AppColors.whiteColor,
        radius: 16,
-       child: IconButton(icon: const Icon(Icons.favorite_border,
-           size: 18, color: AppColors.greyColor),onPressed: (){},),
+       child: IconButton(icon:  Icon(Icons.favorite_border,
+           size: 18, color: AppColors.grey300),onPressed: (){},),
      ),
                       );
   }
