@@ -1,6 +1,6 @@
 
 import 'package:dartz/dartz.dart';
-import 'package:e_commerce/core/cashed/prefs.dart';
+import 'package:e_commerce/core/cache/prefs.dart';
 import 'package:e_commerce/core/errors/failure.dart';
 import 'package:e_commerce/core/utils/constants/app_constants.dart';
 import 'package:e_commerce/core/utils/constants/end_points.dart';
@@ -20,10 +20,12 @@ class AuthRepoImpl implements AuthRepo {
     required CreateAccountRequestModel createAccountRequestModel,
   }) async {
     try {
-      await apiService.post(
+    final result=  await apiService.post(
         EndPoints.register,
         data: createAccountRequestModel.toJson(),
       );
+       final String token = result['token'];
+      Prefs.setString(AppConstants.kToken, token);
       return const Right(null);
     } on CustomException catch (e) {
       return left((ServerFailure(errMessage: e.message)));
@@ -56,6 +58,41 @@ class AuthRepoImpl implements AuthRepo {
         EndPoints.forgotPassword,
         data: {"email": email},
       );
+      Prefs.setString(AppConstants.kForgottenEmail, email);
+      return const Right(null);
+    } on CustomException catch (e) {
+      return left((ServerFailure(errMessage: e.message)));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> verfiyCode({required String code}) async {
+    try {
+      await apiService.post(
+        EndPoints.verifyCode,
+        data: {"resetCode": code},
+      );
+      return const Right(null);
+    } on CustomException catch (e) {
+      return left((ServerFailure(errMessage: e.message)));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> resetPassword({
+    required String newPassword,
+  }) async {
+    try {
+      final result = await apiService.put(
+        EndPoints.resetPassword,
+        data: {
+          "newPassword": newPassword,
+          "email": Prefs.getString(AppConstants.kForgottenEmail),
+        },
+      );
+      final String token = result['token'];
+      Prefs.setString(AppConstants.kToken, token);
+      Prefs.removeData(key: AppConstants.kForgottenEmail);
       return const Right(null);
     } on CustomException catch (e) {
       return left((ServerFailure(errMessage: e.message)));

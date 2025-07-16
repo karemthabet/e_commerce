@@ -1,4 +1,5 @@
 
+import 'package:e_commerce/core/utils/colors/app_colors.dart';
 import 'package:e_commerce/features/onBording/data/model/on_bording_model.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -18,7 +19,7 @@ class DotsIndicators extends StatelessWidget {
         dotWidth: 10,
         dotHeight: 10.0,
         dotColor: Colors.grey.shade300,
-        activeDotColor: Theme.of(context).primaryColor,
+        activeDotColor: AppColors.blueAccentColor,
       ),
     );
   }

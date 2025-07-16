@@ -8,7 +8,7 @@ import 'package:e_commerce/core/widgets/password_field.dart';
 import 'package:e_commerce/features/auth/data/models/login_request_model.dart';
 import 'package:e_commerce/features/auth/presentation/cubits/login_cubit/login_cubit.dart';
 import 'package:e_commerce/features/auth/presentation/cubits/login_cubit/login_states.dart';
-import 'package:e_commerce/features/auth/presentation/widgets/forgot_password_text.dart';
+import 'package:e_commerce/features/auth/presentation/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -44,52 +44,55 @@ class _LoginFormState extends State<LoginForm> {
     return Form(
       key: formKey,
       autovalidateMode: autovalidateMode,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Column(
-          children: [
-            CustomTextFormField(
-              controller: emailController,
-              hintText: "Email",
-              validator: (data) {
-                if (data!.isEmpty) return "Email can't be empty";
-                if (!AppRegex.isEmailValid(data)) return "Invalid email format";
-                return null;
-              },
-            ),
-            const SizedBox(height: 16),
-            PasswordField(
-              controller: passwordController,
-              hintText: "Password",
-            ),
-            const SizedBox(height: 10),
-            const ForgotPasswordText(),
-            const SizedBox(height: 24),
-            BlocConsumer<LoginCubit, LoginStates>(
-              listener: (context, state) {
-                if (state is LoginFailure) {
-                  showSnackBarFuction(context, state.errMessage);
-                } else if (state is LoginSuccess) {
-                  showSnackBarFuction(context, "Login Success");
-                  context.go(RoutesName.home);
-                }
-              },
-              builder: (context, state) {
-                if (state is LoginLoading) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-                return GeneralButton(
-                  text: "Login",
-                  backgroundColor: Theme.of(context).primaryColor,
-                  textColor: AppColors.whiteColor,
-                  onPressed: () => _handleLoginRequest(context),
+      child: Column(
+        children: [
+          CustomTextFormField(
+            controller: emailController,
+            hintText: "Email",
+            validator: (data) {
+              if (data!.isEmpty) return "Email can't be empty";
+              if (!AppRegex.isEmailValid(data)) return "Invalid email format";
+              return null;
+            },
+          ),
+          const SizedBox(height: 16),
+          PasswordField(controller: passwordController, hintText: "Password"),
+          const SizedBox(height: 20),
+          const CustomText(text: "Forgot Password?"),
+          const SizedBox(height: 20),
+          BlocConsumer<LoginCubit, LoginStates>(
+            listener: (context, state) {
+              if (state is LoginFailure) {
+                showSnackBarFuction(context, state.errMessage, isError: true);
+              } else if (state is LoginSuccess) {
+                showSnackBarFuction(
+                  context,
+                  "Login successfully",
+                  isError: false,
+                ).then((_) {
+                  if (context.mounted) {
+                    context.go(RoutesName.home);
+                  }
+                });
+              }
+            },
+            builder: (context, state) {
+              if (state is LoginLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(
+                    color: AppColors.blueAccentColor,
+                  ),
                 );
-              },
-            ),
-          ],
-        ),
+              }
+              return GeneralButton(
+                text: "Login",
+                backgroundColor: AppColors.blueAccentColor,
+                textColor: AppColors.whiteColor,
+                onPressed: () => _handleLoginRequest(context),
+              );
+            },
+          ),
+        ],
       ),
     );
   }

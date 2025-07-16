@@ -7,12 +7,14 @@ class PasswordField extends StatefulWidget {
     this.hintText,
     this.controller,
     this.validator,
+    this.textInputType
   });
 
   final String? hintText;
   final Function(String?)? onSaved;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
+  final TextInputType? textInputType;
 
   @override
   State<PasswordField> createState() => _PasswordFieldState();
@@ -24,26 +26,32 @@ class _PasswordFieldState extends State<PasswordField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      keyboardType: TextInputType.visiblePassword,
       controller: widget.controller,
       obscureText: !isPasswordVisible,
       validator: widget.validator ??
           (data) {
             if (data == null || data.isEmpty) {
-              return "Please enter ${widget.hintText}";
+              return "Please enter ${widget.hintText ?? "password"}";
+            }
+            if (data.length < 6) {
+              return "Password must be at least 6 characters";
             }
             return null;
           },
       onSaved: widget.onSaved,
       style: const TextStyle(fontSize: 16),
       decoration: InputDecoration(
-        hintText: widget.hintText,
+        hintText: widget.hintText ?? "Password",
+        hintStyle: TextStyle(color: Colors.grey.shade500),
+        contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
         filled: true,
-        fillColor: Colors.white,
-        prefixIcon: const Icon(Icons.lock_outline, color: Colors.grey),
+        fillColor: Colors.grey.shade100,
+        prefixIcon: Icon(Icons.lock_outline, color: Colors.grey.shade500),
         suffixIcon: IconButton(
           icon: Icon(
             isPasswordVisible ? Icons.visibility : Icons.visibility_off,
-            color: Colors.grey,
+            color: Colors.grey.shade600,
           ),
           onPressed: () {
             setState(() {
@@ -52,16 +60,16 @@ class _PasswordFieldState extends State<PasswordField> {
           },
         ),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(14),
           borderSide: BorderSide(color: Colors.grey.shade300),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(14),
           borderSide: BorderSide(color: Colors.grey.shade300),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: Colors.blue.shade400),
+          borderRadius: BorderRadius.circular(14),
+          borderSide: BorderSide(color: Colors.blue.shade400, width: 1.5),
         ),
       ),
     );

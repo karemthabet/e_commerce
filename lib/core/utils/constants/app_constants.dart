@@ -3,5 +3,6 @@ class AppConstants {
   static const String kToken = 'token';
   static const seenOnBoarding = 'seenOnBoarding';
   static const isLoggedIn = 'isLoggedIn';
+  static const kForgottenEmail = 'kForgottenEmail';
 
 }

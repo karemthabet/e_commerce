@@ -1,12 +1,16 @@
+import 'package:e_commerce/core/utils/colors/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class AppStyles {
- static TextTheme textTheme = const TextTheme(
-    titleLarge: TextStyle(fontSize: 24),
-    bodyMedium: TextStyle(fontSize: 16),
-    displayLarge: TextStyle(fontSize: 28),
-    bodyLarge: TextStyle(fontSize: 20),
-    bodySmall: TextStyle(fontSize: 14),
+  static TextStyle subTitleStyle = const TextStyle(
+    fontSize: 14,
+    color: AppColors.blackColor,
+    letterSpacing: 0.5,
   );
 
+  static TextStyle bodyStyle = const TextStyle(
+    fontWeight: FontWeight.bold,
+    color: AppColors.blackColor,
+    letterSpacing: 2,
+  );
 }

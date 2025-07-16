@@ -1,4 +1,4 @@
-import 'package:e_commerce/core/utils/app_assets.dart';
+import 'package:e_commerce/core/utils/assets/app_assets.dart';
 
 class OnBoardingModel {
   final String image;

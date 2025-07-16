@@ -7,6 +7,7 @@ import 'package:e_commerce/core/widgets/general_button.dart';
 import 'package:e_commerce/core/widgets/password_field.dart';
 import 'package:e_commerce/features/auth/data/models/create_account_request_model.dart';
 import 'package:e_commerce/features/auth/presentation/cubits/create_account_cubit/create_account_cubit.dart';
+import 'package:e_commerce/features/auth/presentation/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -26,11 +27,12 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
       nameController,
       phoneController,
       confirmPasswordController;
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
 
   @override
-  initState() {
+  void initState() {
     emailController = TextEditingController();
     passwordController = TextEditingController();
     nameController = TextEditingController();
@@ -91,22 +93,34 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
             controller: confirmPasswordController,
             hintText: "Confirm Password",
           ),
+          const CustomText(text: "Already have an account?"),
           BlocConsumer<CreateAccountCubit, CreateAccountStates>(
             listener: (context, state) {
               if (state is CreateAccountFailure) {
-                showSnackBarFuction(context, state.errMessage);
+                showSnackBarFuction(context, state.errMessage, isError: true);
               }
+
               if (state is CreateAccountSuccess) {
-                context.go(RoutesName.login);
+                showSnackBarFuction(
+                  context,
+                  "Account created successfully",
+                  isError: false,
+                ).then((_) {
+                  if (context.mounted) {
+                    context.go(RoutesName.home);
+                  }
+                });
               }
             },
             builder: (context, state) {
               if (state is CreateAccountLoading) {
-                return const CircularProgressIndicator();
+                return const CircularProgressIndicator(
+                  color: AppColors.blueAccentColor,
+                );
               }
               return GeneralButton(
-                text: "Register",
-                backgroundColor: Theme.of(context).primaryColor,
+                text: "Create Account",
+                backgroundColor: AppColors.blueAccentColor,
                 textColor: AppColors.whiteColor,
                 onPressed: () {
                   _handleRegisterRequest(context);
@@ -134,7 +148,7 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
           createAccountRequestModel: createAccountRequestModel,
         );
       } else {
-        showSnackBarFuction(context, "password doesn't match");
+        showSnackBarFuction(context, "password doesn't match", isError: true);
       }
     } else {
       setState(() {

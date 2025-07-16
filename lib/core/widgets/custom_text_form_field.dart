@@ -34,22 +34,24 @@ class CustomTextFormField extends StatelessWidget {
       style: const TextStyle(fontSize: 16),
       decoration: InputDecoration(
         hintText: hintText,
+        hintStyle: TextStyle(color: Colors.grey.shade500),
+        contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
         filled: true,
-        fillColor: Colors.white,
+        fillColor: Colors.grey.shade100,
         prefixIcon: suffixIcon != null
             ? Icon(suffixIcon, color: Colors.grey.shade500)
             : null,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(14),
           borderSide: BorderSide(color: Colors.grey.shade300),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(14),
           borderSide: BorderSide(color: Colors.grey.shade300),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: Colors.blue.shade400),
+          borderRadius: BorderRadius.circular(14),
+          borderSide: BorderSide(color: Colors.blue.shade400, width: 1.5),
         ),
       ),
     );
