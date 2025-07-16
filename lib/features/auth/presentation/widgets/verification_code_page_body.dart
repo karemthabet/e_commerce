@@ -1,7 +1,5 @@
-import 'package:e_commerce/core/utils/colors/app_colors.dart';
 import 'package:e_commerce/core/utils/styles/app_styles.dart';
-import 'package:e_commerce/core/widgets/general_button.dart';
-import 'package:e_commerce/features/auth/presentation/widgets/custom_rich_text.dart';
+import 'package:e_commerce/features/auth/presentation/widgets/verification_code_form.dart';
 import 'package:flutter/material.dart';
 
 class VerificationCodePageBody extends StatelessWidget {
@@ -45,26 +43,10 @@ class VerificationCodePageBody extends StatelessWidget {
             ),
             const SizedBox(height: 18),
 
-            Container(
-              height: 100,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.grey.shade200,
-                borderRadius: BorderRadius.circular(20),
-              ),
-            ),
-            const SizedBox(height: 32),
-            const CustomRichText(
-              normalText: "if you didn't receive a code! ",
-              highlightedTextWithonTap: "Resend",
-            ),
-            const SizedBox(height: 32),
-             GeneralButton(
-                text: "Verify",
-                backgroundColor: AppColors.blueAccentColor,
-                textColor: AppColors.whiteColor,
-                onPressed: (){},
-              )
+            const SizedBox(height: 18),
+            const VerificationCodeForm(),
+
+            const SizedBox(height: 50),
           ],
         ),
       ),

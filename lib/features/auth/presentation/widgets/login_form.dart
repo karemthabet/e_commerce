@@ -8,7 +8,7 @@ import 'package:e_commerce/core/widgets/password_field.dart';
 import 'package:e_commerce/features/auth/data/models/login_request_model.dart';
 import 'package:e_commerce/features/auth/presentation/cubits/login_cubit/login_cubit.dart';
 import 'package:e_commerce/features/auth/presentation/cubits/login_cubit/login_states.dart';
-import 'package:e_commerce/features/auth/presentation/widgets/forgot_password_text.dart';
+import 'package:e_commerce/features/auth/presentation/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';

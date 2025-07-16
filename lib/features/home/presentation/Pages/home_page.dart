@@ -1,4 +1,4 @@
-import 'package:e_commerce/core/cashed/prefs.dart';
+import 'package:e_commerce/core/cache/prefs.dart';
 import 'package:e_commerce/core/utils/constants/app_constants.dart';
 import 'package:e_commerce/core/utils/router/routes_name.dart';
 import 'package:flutter/material.dart';

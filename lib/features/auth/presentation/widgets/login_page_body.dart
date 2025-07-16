@@ -1,18 +1,20 @@
+import 'package:e_commerce/core/utils/router/routes_name.dart';
 import 'package:e_commerce/core/utils/styles/app_styles.dart' show AppStyles;
 import 'package:e_commerce/features/auth/presentation/widgets/custom_rich_text.dart';
 import 'package:e_commerce/features/auth/presentation/widgets/login_form.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginPageBody extends StatelessWidget {
   const LoginPageBody({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return  Padding(
+    return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 22),
       child: SingleChildScrollView(
         reverse: true,
-        physics:const BouncingScrollPhysics(), 
+        physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
             const SizedBox(height: 80),
@@ -52,7 +54,10 @@ class LoginPageBody extends StatelessWidget {
             const SizedBox(height: 32),
             const LoginForm(),
             const SizedBox(height: 24),
-            const CustomRichText(
+            CustomRichText(
+              onTap: () {
+                context.push(RoutesName.createAnAccount);
+              },
               normalText: 'Don\'t have an account?',
               highlightedTextWithonTap: 'Sign Up',
             ),

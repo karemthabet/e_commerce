@@ -1,4 +1,4 @@
-import 'package:e_commerce/core/cashed/prefs.dart';
+import 'package:e_commerce/core/cache/prefs.dart';
 import 'package:e_commerce/core/utils/colors/app_colors.dart';
 import 'package:e_commerce/core/utils/router/routes_name.dart';
 import 'package:e_commerce/core/widgets/general_button.dart';
