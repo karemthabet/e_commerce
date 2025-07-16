@@ -22,8 +22,15 @@ class VerificationCodeForm extends StatelessWidget {
         BlocConsumer<VerifyCodeCubit, VerifyCodeStates>(
           listener: (context, state) {
             if (state is VerifyCodeSuccess) {
-              context.go(RoutesName.resetPassword);
-              showSnackBarFuction(context, "Verified Successfully", isError: false);
+              showSnackBarFuction(
+                context,
+                "verify code successfully",
+                isError: false,
+              ).then((_) {
+                if (context.mounted) {
+                  context.go(RoutesName.resetPassword);
+                }
+              });
             }
             if (state is VerifyCodeFailure) {
               showSnackBarFuction(context, state.errMessage, isError: true);
@@ -74,7 +81,11 @@ class VerificationCodeForm extends StatelessWidget {
                 context.read<ForgotPasswordCubit>().forgotPassword(
                   email: Prefs.getString(AppConstants.kForgottenEmail)!,
                 );
-                showSnackBarFuction(context, "Check your email", isError: false);
+                showSnackBarFuction(
+                  context,
+                  "Check your email",
+                  isError: false,
+                );
               },
               text: 'Resend Code',
               backgroundColor: Colors.blue,
