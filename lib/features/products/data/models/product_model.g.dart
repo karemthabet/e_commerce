@@ -33,6 +33,7 @@ class DataAdapter extends TypeAdapter<Data> {
       ratingsAverage: fields[13] as double?,
       createdAt: fields[14] as String?,
       updatedAt: fields[15] as String?,
+      isFavorite: fields[16] as bool? ?? false, // Default to false if not set
     );
   }
 
@@ -71,7 +72,9 @@ class DataAdapter extends TypeAdapter<Data> {
       ..writeByte(14)
       ..write(obj.createdAt)
       ..writeByte(15)
-      ..write(obj.updatedAt);
+      ..write(obj.updatedAt)
+      ..writeByte(16)
+      ..write(obj.isFavorite ?? false); // Write isFavorite with a default value
   }
 
   @override

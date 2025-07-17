@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:e_commerce/core/cache/hive_product_services.dart';
 import 'package:e_commerce/core/utils/colors/app_colors.dart';
 import 'package:e_commerce/features/favourites/presentation/cubits/favorites_cubit/favorites_cubit.dart';
 import 'package:e_commerce/features/products/data/models/product_model.dart';
@@ -8,7 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomFavorite extends StatefulWidget {
   final Data? product;
-  bool isFavorite = false;
+  ProductsHiveService productsService = ProductsHiveService();
   CustomFavorite({
     super.key,
     required this.product,
@@ -34,13 +35,20 @@ class _CustomFavoriteState extends State<CustomFavorite> {
               return IconButton(
                 icon: Icon(Icons.favorite,
                     size: 18,
-                    color: (widget.isFavorite == false)
+                    color: (widget.product?.isFavorite == false)
                         ? AppColors.grey300
                         : AppColors.pink),
-                onPressed: () {
-                  widget.isFavorite = !widget.isFavorite;
-                  log(widget.product!.title.toString());
-                  context.read<FavoritesCubit>().addToFav(widget.product!);
+                onPressed: () async {
+                  if (widget.product?.isFavorite != null) {
+                    widget.product?.isFavorite = !widget.product!.isFavorite!;
+                    await widget.productsService.updateProductAttributeById(
+                      productId: widget.product!.id!,
+                      attribute: "isFavorite",
+                      newValue: widget.product!.isFavorite!,
+                    );
+                    log(widget.product!.isFavorite.toString());
+                    context.read<FavoritesCubit>().addToFav(widget.product!);
+                  }
                 },
               );
             },

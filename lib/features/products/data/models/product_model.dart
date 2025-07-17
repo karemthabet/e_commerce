@@ -84,6 +84,9 @@ class Data {
   @HiveField(15)
   String? updatedAt;
 
+  @HiveField(16)
+  bool? isFavorite;
+
   Data({
     this.sold,
     this.images,
@@ -101,6 +104,7 @@ class Data {
     this.ratingsAverage,
     this.createdAt,
     this.updatedAt,
+    this.isFavorite = false, // Default to false if not set
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
