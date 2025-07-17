@@ -1,4 +1,5 @@
-import 'package:e_commerce/core/widgets/cart_icon.dart';
+import 'package:e_commerce/core/widgets/general_app_bar.dart';
+import 'package:e_commerce/features/favourites/presentation/widgets/favorites_page_body.dart';
 import 'package:flutter/material.dart';
 
 class FavoritesPage extends StatelessWidget {
@@ -6,9 +7,20 @@ class FavoritesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SafeArea(
-        child: CartIcon(),
+    return Scaffold(
+      body: Column(
+        children: [
+          SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal:12.0,  vertical: 8.00,),
+              child:GeneralAppBar(pageTitle:  "Favorites",),
+            ),
+          ),
+
+          const Expanded(
+            child: FavoritesPageBody(),
+          ),
+        ],
       ),
     );
   }

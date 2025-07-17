@@ -4,7 +4,7 @@ import 'package:e_commerce/core/utils/styles/app_styles.dart';
 import 'package:e_commerce/core/widgets/custom_cursor.dart';
 import 'package:e_commerce/features/products/data/models/product_model.dart';
 import 'package:e_commerce/features/products/presentation/pages/widgets/colors_dot.dart';
-import 'package:e_commerce/features/products/presentation/pages/widgets/custom_favorite.dart';
+import 'package:e_commerce/core/widgets/custom_favorite.dart';
 import 'package:flutter/material.dart';
 
 class ProductDetailsViewBody extends StatefulWidget {

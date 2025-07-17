@@ -1,0 +1,22 @@
+import 'package:e_commerce/features/favourites/presentation/widgets/favorites_item_container_body.dart';
+import 'package:flutter/material.dart';
+
+class FavoritesItem extends StatelessWidget {
+  FavoritesItem({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: MediaQuery.of(context).size.height * 0.13,
+      margin: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey, style: BorderStyle.solid),
+        borderRadius: BorderRadius.circular(
+          12,
+        ),
+      ),
+      child: const FavoritesItemContainerBody()
+    );
+  }
+}
