@@ -22,6 +22,8 @@ class CustomProductCardInfo extends StatelessWidget {
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
+
+        // just the back Container
         child: Container(
           decoration: BoxDecoration(
             color: AppColors.whiteColor,
@@ -35,11 +37,14 @@ class CustomProductCardInfo extends StatelessWidget {
               ),
             ],
           ),
+
+          // product   img +  favorite
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Stack(
                 children: [
+                  //  1- image
                   ClipRRect(
                     borderRadius:
                         const BorderRadius.vertical(top: Radius.circular(12)),
@@ -60,9 +65,13 @@ class CustomProductCardInfo extends StatelessWidget {
                   ),
                     ),
                   ),
-                  const CustomFavorite(),
+
+                  //  2- favorite icon
+                  CustomFavorite(product:product),
                 ],
               ),
+
+
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 child: Text(

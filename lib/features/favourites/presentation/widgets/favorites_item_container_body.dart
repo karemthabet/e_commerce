@@ -2,10 +2,12 @@ import 'package:e_commerce/core/utils/assets/app_assets.dart';
 import 'package:e_commerce/core/utils/colors/app_colors.dart';
 import 'package:e_commerce/core/utils/styles/app_styles.dart';
 import 'package:e_commerce/core/widgets/custom_favorite.dart';
+import 'package:e_commerce/features/products/data/models/product_model.dart';
 import 'package:flutter/material.dart';
 
 class FavoritesItemContainerBody extends StatelessWidget {
-  const FavoritesItemContainerBody({super.key});
+  final Data product;
+  const FavoritesItemContainerBody({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +44,7 @@ class FavoritesItemContainerBody extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Product Name",
+                "${product.title}",
                 style: AppStyles.text16.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
@@ -50,7 +52,7 @@ class FavoritesItemContainerBody extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
               Text(
-                "Price",
+                "${product.price} EGP",
                 style: AppStyles.text16.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
@@ -71,7 +73,7 @@ class FavoritesItemContainerBody extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              const CustomFavorite(),
+               CustomFavorite( product: Data() ),
               SizedBox(
                 child: Container(
                   margin: const EdgeInsets.all(8.0),

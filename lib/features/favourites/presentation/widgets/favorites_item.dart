@@ -1,8 +1,10 @@
 import 'package:e_commerce/features/favourites/presentation/widgets/favorites_item_container_body.dart';
+import 'package:e_commerce/features/products/data/models/product_model.dart';
 import 'package:flutter/material.dart';
 
 class FavoritesItem extends StatelessWidget {
-  FavoritesItem({super.key});
+  final Data product;
+  const FavoritesItem({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,7 @@ class FavoritesItem extends StatelessWidget {
           12,
         ),
       ),
-      child: const FavoritesItemContainerBody()
+      child: FavoritesItemContainerBody(product: product),
     );
   }
 }

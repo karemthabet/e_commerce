@@ -1,6 +1,6 @@
 import 'package:e_commerce/core/utils/colors/app_colors.dart';
 import 'package:e_commerce/features/products/data/models/product_model.dart';
-import 'package:e_commerce/features/products/presentation/pages/widgets/product_view_details_view_body.dart';
+import 'package:e_commerce/features/products/presentation/widgets/product_view_details_view_body.dart';
 import 'package:flutter/material.dart';
 
 class ProductDetailsView extends StatelessWidget {

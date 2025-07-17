@@ -27,7 +27,9 @@ class ProductsModel {
       _data["data"] = data?.map((e) => e.toJson()).toList();
     }
     return _data;
-  }
+  
+    
+   }
 }
 
 
@@ -259,11 +261,11 @@ class Metadata {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["currentPage"] = currentPage;
-    _data["numberOfPages"] = numberOfPages;
-    _data["limit"] = limit;
-    _data["nextPage"] = nextPage;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["currentPage"] = currentPage;
+    data["numberOfPages"] = numberOfPages;
+    data["limit"] = limit;
+    data["nextPage"] = nextPage;
+    return data;
   }
 }

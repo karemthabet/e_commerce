@@ -1,5 +1,5 @@
 import 'package:e_commerce/core/widgets/general_app_bar.dart';
-import 'package:e_commerce/features/favourites/presentation/widgets/favorites_page_body.dart';
+import 'package:e_commerce/features/favourites/presentation/widgets/favorites_page_list_view.dart';
 import 'package:flutter/material.dart';
 
 class FavoritesPage extends StatelessWidget {
@@ -12,13 +12,18 @@ class FavoritesPage extends StatelessWidget {
         children: [
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal:12.0,  vertical: 8.00,),
-              child:GeneralAppBar(pageTitle:  "Favorites",),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 12.0,
+                vertical: 8.00,
+              ),
+              child: GeneralAppBar(
+                pageTitle: "Favorites",
+              ),
             ),
           ),
-
           const Expanded(
-            child: FavoritesPageBody(),
+            flex: 1,
+            child: FavoritesPageListView(),
           ),
         ],
       ),
