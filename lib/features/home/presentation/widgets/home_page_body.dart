@@ -1,14 +1,13 @@
 import 'package:e_commerce/core/utils/assets/app_assets.dart';
 import 'package:e_commerce/core/utils/colors/app_colors.dart';
-import 'package:e_commerce/core/utils/router/routes_name.dart';
+import 'package:e_commerce/core/widgets/cart_icon.dart';
 import 'package:e_commerce/core/widgets/custom_cursor.dart';
-import 'package:e_commerce/features/home/presentation/Pages/widgets/custom_home_shimmer.dart';
-import 'package:e_commerce/features/home/presentation/Pages/widgets/custom_list_view_card.dart';
+import 'package:e_commerce/features/home/presentation/widgets/custom_home_shimmer.dart';
+import 'package:e_commerce/features/home/presentation/widgets/custom_list_view_card.dart';
 import 'package:e_commerce/features/home/presentation/cubits/cubit_brand/brand_cubit.dart';
 import 'package:e_commerce/features/home/presentation/cubits/cubit_category/category_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
 class HomePagesBody extends StatelessWidget {
   const HomePagesBody({super.key});
@@ -23,30 +22,17 @@ class HomePagesBody extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
+                    Text(
                       "𝒮𝒽𝑜𝓅𝓅𝒾𝑒",
                       style: TextStyle(fontSize: 50, color: AppColors.bluedark),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 10,
                     ),
-                    IconButton(
-                      icon: const Icon(
-                        Icons.shopping_cart,
-                        color: AppColors.bluedark,
-                        size: 40,
-                      ),
-                      onPressed: ()  {
-                    
-
-                        if (context.mounted) {
-                          context.go(RoutesName.login);
-                        }
-                      },
-                    )
+                 CartIcon(),
                   ],
                 ),
                 const SizedBox(

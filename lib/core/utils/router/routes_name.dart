@@ -8,5 +8,7 @@ class RoutesName {
   static const String verficationCode = '/verficationCode';
   static const String resetPassword = '/resetPassword';
   static const String productDetails = '/productDetails';
+  static const String favourites = '/favourites';
+
 
 }

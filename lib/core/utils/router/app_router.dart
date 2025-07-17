@@ -5,6 +5,7 @@ import 'package:e_commerce/features/auth/presentation/pages/forgot_password_page
 import 'package:e_commerce/features/auth/presentation/pages/login_page.dart';
 import 'package:e_commerce/features/auth/presentation/pages/reset_password_page.dart';
 import 'package:e_commerce/features/auth/presentation/pages/verification_code_page.dart';
+import 'package:e_commerce/features/favourites/presentation/pages/favourites_page.dart';
 import 'package:e_commerce/features/home/presentation/Pages/home_page.dart';
 import 'package:e_commerce/features/home/presentation/cubits/cubit_brand/brand_cubit.dart';
 import 'package:e_commerce/features/home/presentation/cubits/cubit_category/category_cubit.dart';
@@ -77,6 +78,13 @@ class AppRouter {
         name: RoutesName.resetPassword,
         path: RoutesName.resetPassword,
         builder: (context, state) => const ResetPasswordPage(),
+      ),
+
+
+       GoRoute(
+        name: RoutesName.favourites,
+        path: RoutesName.favourites,
+        builder: (context, state) => const FavouritesPage(),
       ),
     ],
   );

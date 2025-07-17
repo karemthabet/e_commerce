@@ -1,6 +1,7 @@
 
-import 'package:e_commerce/features/home/presentation/Pages/widgets/custom_bottom_nav_bar.dart';
-import 'package:e_commerce/features/home/presentation/Pages/widgets/home_page_body.dart';
+import 'package:e_commerce/features/favourites/presentation/pages/favourites_page.dart';
+import 'package:e_commerce/features/home/presentation/widgets/custom_bottom_nav_bar.dart';
+import 'package:e_commerce/features/home/presentation/widgets/home_page_body.dart';
 import 'package:e_commerce/features/products/presentation/pages/product_page.dart';
 import 'package:flutter/material.dart';
 
@@ -17,9 +18,10 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> screens = [
     const HomePagesBody(),
 const ProductPage(),
-    const Center(child: Text("Favorites")),
+    const FavouritesPage(),
     const Center(child: Text("Profile")),
   ];
+
 
   void onTap(int index) {
     setState(() {
