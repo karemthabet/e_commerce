@@ -8,8 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomFavorite extends StatefulWidget {
   final Data? product;
-   static bool isFavorite  = false;
-   const CustomFavorite({
+  bool isFavorite = false;
+  CustomFavorite({
     super.key,
     required this.product,
   });
@@ -27,15 +27,24 @@ class _CustomFavoriteState extends State<CustomFavorite> {
       child: CircleAvatar(
         backgroundColor: AppColors.whiteColor,
         radius: 16,
-        child: IconButton(
-          icon: Icon(Icons.favorite, size: 18, color: (CustomFavorite.isFavorite==false)? AppColors.grey300: AppColors.pink),
-          onPressed: () {
-            setState(() {
-              CustomFavorite.isFavorite = !CustomFavorite.isFavorite;
-              log(widget.product!.title.toString() );
-              context.read<FavoritesCubit>().addToFav(widget.product!);
-            });
-          },
+        child: BlocProvider(
+          create: (context) => FavoritesCubit(),
+          child: BlocBuilder<FavoritesCubit, FavoritesState>(
+            builder: (context, state) {
+              return IconButton(
+                icon: Icon(Icons.favorite,
+                    size: 18,
+                    color: (widget.isFavorite == false)
+                        ? AppColors.grey300
+                        : AppColors.pink),
+                onPressed: () {
+                  widget.isFavorite = !widget.isFavorite;
+                  log(widget.product!.title.toString());
+                  context.read<FavoritesCubit>().addToFav(widget.product!);
+                },
+              );
+            },
+          ),
         ),
       ),
     );
