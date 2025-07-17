@@ -1,5 +1,5 @@
 
-import 'package:e_commerce/features/favourites/presentation/pages/favourites_page.dart';
+import 'package:e_commerce/features/favourites/presentation/pages/favorites_page.dart';
 import 'package:e_commerce/features/home/presentation/widgets/custom_bottom_nav_bar.dart';
 import 'package:e_commerce/features/home/presentation/widgets/home_page_body.dart';
 import 'package:e_commerce/features/products/presentation/pages/product_page.dart';
@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> screens = [
     const HomePagesBody(),
 const ProductPage(),
-    const FavouritesPage(),
+    const FavoritesPage(),
     const Center(child: Text("Profile")),
   ];
 
