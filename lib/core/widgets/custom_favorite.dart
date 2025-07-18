@@ -40,13 +40,19 @@ class _CustomFavoriteState extends State<CustomFavorite> {
                         : AppColors.pink),
                 onPressed: () async {
                   if (widget.product?.isFavorite != null) {
-                    widget.product?.isFavorite = !widget.product!.isFavorite!;
+                    // step 1: toggle the favorite status UI
+                    context
+                        .read<FavoritesCubit>()
+                        .updateFavoritesHeart(widget.product!);
+
+                    // step 2: update the favorite status in the database Hive
                     await widget.productsService.updateProductAttributeById(
                       productId: widget.product!.id!,
                       attribute: "isFavorite",
                       newValue: widget.product!.isFavorite!,
                     );
-                    log(widget.product!.isFavorite.toString());
+
+                    // step 3: add the product to the favorites list Favorites Page
                     context.read<FavoritesCubit>().addToFav(widget.product!);
                   }
                 },

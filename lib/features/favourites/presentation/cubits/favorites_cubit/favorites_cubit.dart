@@ -25,4 +25,9 @@ class FavoritesCubit extends Cubit<FavoritesState> {
     emit(DeleteFromFavoritesSuccessState());
   }
 
+  void updateFavoritesHeart(Data product){
+    product.isFavorite = !product.isFavorite!;
+    emit(UpdateFavoritesHeartSuccessState());
+  }
+
 }

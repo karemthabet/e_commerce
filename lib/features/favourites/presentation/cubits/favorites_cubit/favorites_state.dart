@@ -32,3 +32,8 @@ final class DeleteFromFavoritesFailureState extends FavoritesState {
   final String error;
   const DeleteFromFavoritesFailureState(this.error);
 }
+final class UpdateFavoritesHeartSuccessState extends FavoritesState {}
+final class UpdateFavoritesHeartFailureState extends FavoritesState {
+  final String error;
+  const UpdateFavoritesHeartFailureState(this.error);
+}

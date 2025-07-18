@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:e_commerce/core/cache/hive_product_services.dart';
 import 'package:e_commerce/core/errors/exception.dart';
@@ -12,26 +14,26 @@ class ProductRepoImpl extends ProductRepo {
   final ProductsHiveService hiveService;
 
   ProductRepoImpl({required this.apiService, required this.hiveService});
-
   @override
   Future<Either<Failure, List<Data>>> fetchProducts() async {
     try {
-      final map = await apiService.get(EndPoints.products);
-
-      final dataList = (map['data'] as List)
-          .map((e) => Data.fromJson(e))
-          .toList();
-
-      await hiveService.cacheProducts(dataList);
-
-      return right(dataList);
-    } on CustomException catch (e) {
-      final cached = hiveService.getCachedProducts();
-
-      if (cached.isNotEmpty) {
-        return right(cached);
+      // ✅ 1) Check cached products first
+      final cachedProducts = hiveService.getCachedProducts();
+      if (cachedProducts.isNotEmpty) {
+        return right(cachedProducts); // ✅ Immediately return cached data
       }
 
+      // ✅ 2) If no cached data → fetch from API
+      final map = await apiService.get(EndPoints.products);
+      final dataList =
+          (map['data'] as List).map((e) => Data.fromJson(e)).toList();
+
+      // ✅ 3) Save fresh data to cache
+      await hiveService.cacheProducts(dataList);
+
+      return right(dataList); // ✅ Return fresh data
+    } on CustomException catch (e) {
+      // ✅ 4) If API fails & no cache
       return left(ServerFailure(errMessage: e.message));
     }
   }
