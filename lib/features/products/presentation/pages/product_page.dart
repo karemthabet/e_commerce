@@ -9,7 +9,6 @@ class ProductPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProductsCubit, ProductsState>(
-
       builder: (context, state) {
         context.read<ProductsCubit>().getProducts();
         return const Scaffold(

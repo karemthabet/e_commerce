@@ -24,7 +24,7 @@ class FavoritesPageListView extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    'No Favorites Yet',
+                    'No Favorites Yet  😅😅',
                     style: AppStyles.text16.copyWith(
                       fontSize: 30,
                     ),
@@ -32,6 +32,7 @@ class FavoritesPageListView extends StatelessWidget {
                   const ProductCardShimmer()
                 ],
               );
+
             } else {
               return ListView.builder(
                 physics: const BouncingScrollPhysics(),
@@ -42,7 +43,14 @@ class FavoritesPageListView extends StatelessWidget {
               );
             }
           } else {
-            return const SizedBox();
+            return Center(
+              child: Text(
+                    'Something went wrong  🥸🥸',
+                    style: AppStyles.text16.copyWith(
+                      fontSize: 30,
+                    ),
+                  ),
+            );
           }
         },
       ),
