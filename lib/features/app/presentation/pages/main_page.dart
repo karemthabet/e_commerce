@@ -10,8 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MainPage extends StatefulWidget {
-  const MainPage({super.key});
+  final int initialIndex;
 
+const MainPage({super.key, this.initialIndex = 0}); // default is 0 (Home)
   @override
   State<MainPage> createState() => _MainPageState();
 }
@@ -33,6 +34,19 @@ class _MainPageState extends State<MainPage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+        currentIndex = widget.initialIndex; // start from passed index
+
+ 
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
@@ -49,13 +63,13 @@ class _MainPageState extends State<MainPage> {
           create: (context) => getIt.get<ProductsCubit>()..getProducts(),
         ),
       ],
-      child: Scaffold(
-        body: screens[currentIndex],
-        bottomNavigationBar: CustomBottomNavigationBar(
-          onTap: onTap,
-          currentIndex: currentIndex,
-        ),
+      child:   Scaffold(
+      body: screens[currentIndex],
+      bottomNavigationBar: CustomBottomNavigationBar(
+        onTap: onTap,
+        currentIndex: currentIndex,
       ),
+    )
     );
   }
 }
