@@ -2,7 +2,6 @@ import 'package:e_commerce/core/utils/colors/app_colors.dart';
 import 'package:e_commerce/features/app/presentation/pages/main_page.dart';
 import 'package:e_commerce/features/products/data/models/product_model.dart';
 import 'package:e_commerce/features/products/presentation/cubits/product_cubit/products_cubit.dart';
-import 'package:e_commerce/features/products/presentation/pages/product_page.dart';
 import 'package:e_commerce/features/products/presentation/widgets/product_view_details_view_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

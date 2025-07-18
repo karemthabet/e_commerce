@@ -17,7 +17,7 @@ class FavoritesPage extends StatelessWidget {
                 vertical: 8.00,
               ),
               child: GeneralAppBar(
-                pageTitle: "Favorites",
+                pageTitle: "𝐹𝒶𝓋ℴ𝓇𝒾𝓉ℯ",
               ),
             ),
           ),

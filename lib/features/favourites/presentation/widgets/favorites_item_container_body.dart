@@ -1,4 +1,4 @@
-import 'package:e_commerce/core/utils/assets/app_assets.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_commerce/core/utils/colors/app_colors.dart';
 import 'package:e_commerce/core/utils/styles/app_styles.dart';
 import 'package:e_commerce/core/widgets/custom_favorite.dart';
@@ -18,13 +18,21 @@ class FavoritesItemContainerBody extends StatelessWidget {
         Expanded(
           flex: 2,
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: Container(
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(AppAssets.sliderImageOne),
-                  fit: BoxFit.cover,
-                ),
+            borderRadius: const BorderRadius.all(Radius.circular(18)),
+            child: CachedNetworkImage(
+              imageUrl: product.imageCover!,
+              //  height: 100,
+              width: double.infinity,
+              fit: BoxFit.cover,
+              placeholder: (context, url) => Container(
+                // height: 100,
+                color: Colors.grey[200],
+                child: const Center(child: CircularProgressIndicator()),
+              ),
+              errorWidget: (context, url, error) => const Icon(
+                size: 60,
+                Icons.broken_image,
+                color: Colors.red,
               ),
             ),
           ),
