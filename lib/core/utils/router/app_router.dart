@@ -19,35 +19,54 @@ import 'package:go_router/go_router.dart';
 class AppRouter {
   static final router = GoRouter(
     routes: [
+      // Splash Screen
       GoRoute(
         path: RoutesName.splash,
         builder: (context, state) => const SplashPage(),
       ),
-      GoRoute(
-        path: RoutesName.productDetails,
-        name: RoutesName.productDetails,
-        builder: (context, state) {
-          final product = state.extra as Data;
-          return ProductDetailsView(
-            product: product,
-          );
-        },
-      ),
+
+      // Onboarding Screen
       GoRoute(
         path: RoutesName.onBoarding,
         builder: (context, state) => const OnBordingPage(),
       ),
+
+      //  Create Account Screen
+      GoRoute(
+        name: RoutesName.createAnAccount,
+        path: RoutesName.createAnAccount,
+        builder: (context, state) => const CreateAccountPage(),
+      ),
+
+      // Login Screen
       GoRoute(
         name: RoutesName.login,
         path: RoutesName.login,
         builder: (context, state) => const LoginPage(),
       ),
-      GoRoute(
-        name: RoutesName.createAnAccount,
 
-        path: RoutesName.createAnAccount,
-        builder: (context, state) => const CreateAccountPage(),
+      // Verification Code Screen
+      GoRoute(
+        name: RoutesName.verficationCode,
+        path: RoutesName.verficationCode,
+        builder: (context, state) => const VerificationCodePage(),
       ),
+
+      // Forgot Password Screen
+      GoRoute(
+        name: RoutesName.forgotPassword,
+        path: RoutesName.forgotPassword,
+        builder: (context, state) => const ForgotPasswordPage(),
+      ),
+
+      // Reset Password Screen
+      GoRoute(
+        name: RoutesName.resetPassword,
+        path: RoutesName.resetPassword,
+        builder: (context, state) => const ResetPasswordPage(),
+      ),
+
+      // Home Screen
       GoRoute(
         name: RoutesName.home,
         path: RoutesName.home,
@@ -64,24 +83,20 @@ class AppRouter {
           child: const HomePage(),
         ),
       ),
+      // Product Details Screen
       GoRoute(
-        name: RoutesName.forgotPassword,
-        path: RoutesName.forgotPassword,
-        builder: (context, state) => const ForgotPasswordPage(),
-      ),
-       GoRoute(
-        name: RoutesName.verficationCode,
-        path: RoutesName.verficationCode,
-        builder: (context, state) => const VerificationCodePage(),
-      ),
-      GoRoute(
-        name: RoutesName.resetPassword,
-        path: RoutesName.resetPassword,
-        builder: (context, state) => const ResetPasswordPage(),
+        path: RoutesName.productDetails,
+        name: RoutesName.productDetails,
+        builder: (context, state) {
+          final product = state.extra as Data;
+          return ProductDetailsView(
+            product: product,
+          );
+        },
       ),
 
-
-       GoRoute(
+      // Favorites Screen
+      GoRoute(
         name: RoutesName.favorites,
         path: RoutesName.favorites,
         builder: (context, state) => const FavoritesPage(),
