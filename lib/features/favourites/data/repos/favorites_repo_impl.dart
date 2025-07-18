@@ -13,19 +13,15 @@ class FavoritesRepoImpl extends FavoritesRepo {
   @override
   Future<Either<Failure, String>> updateProductAttributeById(
       {String? productId, String? attribute, bool? newValue}) {
-        
     try {
-  hiveService.updateProductAttributeById(
-    productId: productId!,
-    attribute: "isFavorite",
-    newValue: newValue,
-  );
-    return Future.value(const Right("isFavorite updated successfully"));
-
-
-} on Exception catch (e) {
-  return Future.value(Left(ServerFailure( errMessage: e.toString())));
-}
-
+      hiveService.updateProductAttributeById(
+        productId: productId!,
+        attribute: "isFavorite",
+        newValue: newValue,
+      );
+      return Future.value(const Right("isFavorite updated successfully"));
+    } on Exception catch (e) {
+      return Future.value(Left(ServerFailure(errMessage: e.toString())));
+    }
   }
 }
