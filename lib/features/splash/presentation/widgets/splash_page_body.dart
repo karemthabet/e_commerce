@@ -59,7 +59,7 @@ class _SplashPageBodyState extends State<SplashPageBody>
     } else if (token == null) {
       context.go(RoutesName.login);
     } else {
-      context.go(RoutesName.home);
+      context.go(RoutesName.mainPage);
     }
   }
 

@@ -68,7 +68,7 @@ class _ResetPasswordFormState extends State<ResetPasswordForm> {
                   isError: false,
                 ).then((_) {
                   if (context.mounted) {
-                    context.go(RoutesName.home);
+                    context.go(RoutesName.mainPage);
                   }
                 });
               }

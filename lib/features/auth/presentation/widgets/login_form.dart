@@ -71,7 +71,7 @@ class _LoginFormState extends State<LoginForm> {
                   isError: false,
                 ).then((_) {
                   if (context.mounted) {
-                    context.go(RoutesName.home);
+                    context.go(RoutesName.mainPage);
                   }
                 });
               }

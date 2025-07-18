@@ -18,12 +18,12 @@ class _OnBoardingPageBodyState extends State<OnBoardingPageBody> {
 
   @override
   void initState() {
-    controller =
-        PageController()..addListener(() {
-          setState(() {
-            currentPage = controller.page?.round() ?? 0;
-          });
+    controller = PageController()
+      ..addListener(() {
+        setState(() {
+          currentPage = controller.page?.round() ?? 0;
         });
+      });
     super.initState();
   }
 

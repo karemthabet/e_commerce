@@ -1,5 +1,6 @@
 import 'package:e_commerce/core/services/setup_service_locator.dart';
 import 'package:e_commerce/core/utils/router/routes_name.dart';
+import 'package:e_commerce/features/app/presentation/pages/main_page.dart';
 import 'package:e_commerce/features/auth/presentation/pages/create_account_page.dart';
 import 'package:e_commerce/features/auth/presentation/pages/forgot_password_page.dart';
 import 'package:e_commerce/features/auth/presentation/pages/login_page.dart';
@@ -66,22 +67,18 @@ class AppRouter {
         builder: (context, state) => const ResetPasswordPage(),
       ),
 
+      // Main Page
+      GoRoute(
+        name: RoutesName.mainPage,
+        path: RoutesName.mainPage,
+        builder: (context, state) => MainPage(),
+      ),
+
       // Home Screen
       GoRoute(
         name: RoutesName.home,
         path: RoutesName.home,
-        builder: (context, state) => MultiBlocProvider(
-          providers: [
-            BlocProvider(
-              create: (context) =>
-                  getIt.get<CategoryCubit>()..getAllCategories(),
-            ),
-            BlocProvider(
-              create: (context) => getIt.get<BrandCubit>()..getAllBrands(),
-            ),
-          ],
-          child: const HomePage(),
-        ),
+        builder: (context, state) => const HomePage(),
       ),
       // Product Details Screen
       GoRoute(
