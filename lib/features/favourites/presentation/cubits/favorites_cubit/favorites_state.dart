@@ -38,8 +38,22 @@ final class UpdateFavoritesHeartFailureState extends FavoritesState {
   const UpdateFavoritesHeartFailureState(this.error);
 }
 
+
+
 final class UpdateFavoritesListSuccessState extends FavoritesState {
   final List<Data> favorites;
 
   const UpdateFavoritesListSuccessState(this.favorites);
+}
+
+
+final class UpdateIsFavoriteAttributeSuccessState extends FavoritesState { 
+  final String successMessage;
+  const UpdateIsFavoriteAttributeSuccessState(this.successMessage);
+
+}
+
+final class UpdateIsFavoriteAttributeFailureState extends FavoritesState {
+  final String error;
+  const UpdateIsFavoriteAttributeFailureState(this.error);
 }

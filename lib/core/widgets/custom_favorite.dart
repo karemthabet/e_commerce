@@ -1,4 +1,5 @@
 import 'package:e_commerce/core/cache/hive_product_services.dart';
+import 'package:e_commerce/core/services/setup_service_locator.dart';
 import 'package:e_commerce/core/utils/colors/app_colors.dart';
 import 'package:e_commerce/features/favourites/presentation/cubits/favorites_cubit/favorites_cubit.dart';
 import 'package:e_commerce/features/products/data/models/product_model.dart';
@@ -27,7 +28,7 @@ class _CustomFavoriteState extends State<CustomFavorite> {
         backgroundColor: AppColors.whiteColor,
         radius: 16,
         child: BlocProvider(
-          create: (context) => FavoritesCubit(),
+          create: (context) => getIt.get<FavoritesCubit>(),
           child: BlocBuilder<FavoritesCubit, FavoritesState>(
             builder: (context, state) {
               return IconButton(
@@ -44,14 +45,13 @@ class _CustomFavoriteState extends State<CustomFavorite> {
                         .updateFavoritesHeart(widget.product!);
 
                     // step 2: update the favorite status in the Local Storage Hive
-                    await widget.productsService.updateProductAttributeById(
-                      productId: widget.product!.id!,
-                      attribute: "isFavorite",
-                      newValue: widget.product!.isFavorite!,
-                    );
+                    context.read<FavoritesCubit>().updateIsFavoriteAttribute(
+                        widget.product!.id, widget.product!.isFavorite!);
 
                     // step 3: update the favorites list in the FavoritesCubit  (add - remove)
-                    context.read<FavoritesCubit>().updateFavoritesList(widget.product!);
+                    context
+                        .read<FavoritesCubit>()
+                        .updateFavoritesList(widget.product!);
                   }
                 },
               );

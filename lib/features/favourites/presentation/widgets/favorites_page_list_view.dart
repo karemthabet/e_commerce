@@ -1,4 +1,7 @@
+import 'package:e_commerce/core/services/api_service.dart';
+import 'package:e_commerce/core/services/setup_service_locator.dart';
 import 'package:e_commerce/core/utils/styles/app_styles.dart';
+import 'package:e_commerce/features/favourites/data/repos/favorites_repo_impl.dart';
 import 'package:e_commerce/features/favourites/presentation/cubits/favorites_cubit/favorites_cubit.dart';
 import 'package:e_commerce/features/favourites/presentation/widgets/favorites_item.dart';
 import 'package:e_commerce/features/products/presentation/widgets/product_card_shimmer.dart';
@@ -11,7 +14,7 @@ class FavoritesPageListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => FavoritesCubit()..getFavorites(),
+          create: (context) => getIt.get<FavoritesCubit>()..getFavorites(),
       child: BlocBuilder<FavoritesCubit, FavoritesState>(
         builder: (context, state) {
           if (state is GetFavoritesSuccessState) {

@@ -1,14 +1,30 @@
 import 'package:bloc/bloc.dart';
+import 'package:e_commerce/features/favourites/data/repos/favorites_repo.dart';
 import 'package:e_commerce/features/products/data/models/product_model.dart';
 part 'favorites_state.dart';
 
 class FavoritesCubit extends Cubit<FavoritesState> {
-  FavoritesCubit() : super(FavoritesInitial());
+  FavoritesRepo favoritesRepo;
+  FavoritesCubit(this.favoritesRepo) : super(FavoritesInitial());
   static List<Data> favoritesItems = [];
 
   void updateFavoritesHeart(Data product) {
     product.isFavorite = !product.isFavorite!;
     emit(UpdateFavoritesHeartSuccessState());
+  }
+
+  Future<void> updateIsFavoriteAttribute(String? productId, bool? newValue) async {
+    final result = await favoritesRepo.updateProductAttributeById(
+      productId: productId,
+      attribute: "isFavorite",
+      newValue: newValue,
+    );
+    result.fold(
+      (failure) => emit(UpdateFavoritesHeartFailureState(failure.errMessage!)),
+      (success) => emit(UpdateIsFavoriteAttributeSuccessState(success)),
+    );
+
+    
   }
 
   getFavorites() {
