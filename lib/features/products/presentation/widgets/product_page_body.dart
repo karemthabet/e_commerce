@@ -20,7 +20,7 @@ class ProductPageBody extends StatelessWidget {
             ]),
           ),
         ),
-         CustomProductGridView()
+         const CustomProductGridView()
       ],
     );
   }

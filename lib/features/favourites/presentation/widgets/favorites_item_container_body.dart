@@ -11,88 +11,89 @@ class FavoritesItemContainerBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // This widget builds the body of the favorites item container
-    // It includes the product image, name, price, and action buttons
-    // one Row  including Expanded image + a Column for name and price + a Column for actions
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // product image
+        // Product image
         Expanded(
-          child: Container(
-            margin: const EdgeInsets.all(2.0),
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Colors.grey,
-                style: BorderStyle.solid,
+          flex: 2,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(AppAssets.sliderImageOne),
+                  fit: BoxFit.cover,
+                ),
               ),
-              image: const DecorationImage(
-                image: AssetImage(AppAssets.sliderImageOne),
-                fit: BoxFit.cover,
-              ),
-              borderRadius: BorderRadius.circular(12),
             ),
           ),
         ),
 
-        // product name and price
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "${product.title}",
-                style: AppStyles.text16.copyWith(
-                  fontWeight: FontWeight.bold,
+        const SizedBox(width: 2),
+
+        // Product name & price
+        Expanded(
+          flex: 3,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  product.title ?? "No Name",
+                  style: AppStyles.text16.copyWith(fontWeight: FontWeight.bold),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-              Text(
-                "${product.price} EGP",
-                style: AppStyles.text16.copyWith(
-                  fontWeight: FontWeight.bold,
+                const SizedBox(height: 4),
+                Text(
+                  "${product.price ?? 0} EGP",
+                  style: AppStyles.text16.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.bluedark,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ],
+              ],
+            ),
           ),
         ),
-        const SizedBox(
-          width: 10,
-        ),
 
-        // product action buttons
+        const SizedBox(width: 10),
+
+        // action buttons  favorite + Add to Cart
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-               CustomFavorite( product: Data() ),
-              SizedBox(
-                child: Container(
-                  margin: const EdgeInsets.all(8.0),
-                  decoration: BoxDecoration(
-                    color: AppColors.bluedark,
-                    border: Border.all(
-                      color: Colors.grey,
-                      style: BorderStyle.solid,
+              CustomFavorite(product: product),
+              const SizedBox(height: 6),
+
+              // Add to Cart button (Responsive)
+              ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 120),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.bluedark,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
                     ),
-                    borderRadius: BorderRadius.circular(22),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
                   ),
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        "Add to Cart",
-                        style: AppStyles.text16.copyWith(
-                          color: Colors.white,
-                        ),
+                  onPressed: () {},
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      "Add to Cart",
+                      style: AppStyles.text16.copyWith(
+                        color: Colors.white,
+                        fontSize: 14, // Slightly smaller to prevent overflow
                       ),
                     ),
                   ),

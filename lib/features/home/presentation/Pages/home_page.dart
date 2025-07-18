@@ -1,4 +1,3 @@
-
 import 'package:e_commerce/features/favourites/presentation/pages/favorites_page.dart';
 import 'package:e_commerce/features/home/presentation/widgets/custom_bottom_nav_bar.dart';
 import 'package:e_commerce/features/home/presentation/widgets/home_page_body.dart';
@@ -17,11 +16,10 @@ class _HomePageState extends State<HomePage> {
 
   final List<Widget> screens = [
     const HomePagesBody(),
-const ProductPage(),
+    const ProductPage(),
     const FavoritesPage(),
     const Center(child: Text("Profile")),
   ];
-
 
   void onTap(int index) {
     setState(() {
@@ -32,8 +30,8 @@ const ProductPage(),
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: screens[currentIndex],
-      bottomNavigationBar:CustomBottomNavigationBar(onTap: onTap, currentIndex: currentIndex)
-    );
+        body: screens[currentIndex],
+        bottomNavigationBar: CustomBottomNavigationBar(
+            onTap: onTap, currentIndex: currentIndex));
   }
 }
