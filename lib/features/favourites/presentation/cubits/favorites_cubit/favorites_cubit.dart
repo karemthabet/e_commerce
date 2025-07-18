@@ -19,19 +19,19 @@ class FavoritesCubit extends Cubit<FavoritesState> {
 
   void addToFav(Data product) {
     favoritesItems.add(product);
-    emit(AddToFavoritesSuccessState());
+ //   emit(AddToFavoritesSuccessState());
   }
 
   void deleteFromFav(Data product) {
     favoritesItems.remove(product);
-    emit(DeleteFromFavoritesSuccessState());
+   // emit(DeleteFromFavoritesSuccessState());
   }
 
   void updateFavoritesList(Data product) {
     if (product.isFavorite!) {
-      favoritesItems.add(product);
+      addToFav(product);
     } else if (!product.isFavorite!) {
-      favoritesItems.remove(product);
+     deleteFromFav(product);
     } else {
       favoritesItems.removeWhere((item) => item.id == product.id);
     }
