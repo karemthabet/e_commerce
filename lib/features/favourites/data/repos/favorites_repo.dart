@@ -10,7 +10,7 @@ abstract class FavoritesRepo {
   // remove from favorites LIST
  Future<Either<Failure, String>> removeFromFavorites({required String productId});
   // remove all favorites
- Future<Either<Failure, List<Data>>> removeAllFavorites();
+ Future<Either<Failure, String>> removeAllFavorites();
   // get all favorites
   Future<Either<Failure, List<Data>>> getFavorites();
   //update ITEM atrribute

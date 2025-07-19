@@ -15,8 +15,10 @@ import 'package:e_commerce/features/products/data/models/data_model.dart';
 class FavoritesRepoImpl implements FavoritesRepo {
   final ApiService apiService;
   final ProductsHiveService hiveService;
-
-  FavoritesRepoImpl({required this.apiService, required this.hiveService});
+  late final token;
+  FavoritesRepoImpl({required this.apiService, required this.hiveService}) {
+    token = Prefs.getString(AppConstants.kToken);
+  }
 
   /// ************************ LOCALLY *****************************************
 
@@ -58,13 +60,13 @@ class FavoritesRepoImpl implements FavoritesRepo {
   @override
   Future<Either<Failure, String>> addToFavorites(
       {required String productId}) async {
-    final token = Prefs.getString(AppConstants.kToken);
+    // final token = Prefs.getString(AppConstants.kToken);
     try {
       final response = await apiService.post(EndPoints.postFavorite, data: {
         "productId": productId,
       }, headers: {
-       // "Authorization": "Bearer $token", // if API requires Bearer
-          "token": token,  
+        // "Authorization": "Bearer $token", // if API requires Bearer
+        "token": token,
       });
 
       log(" Wishlist Response: $response");
@@ -76,23 +78,33 @@ class FavoritesRepoImpl implements FavoritesRepo {
   }
 
   @override
-  Future<Either<Failure, List<Data>>> removeAllFavorites() {
-    throw UnimplementedError();
+  Future<Either<Failure, String>> removeFromFavorites(
+      {required String productId}) async {
+//    final token = Prefs.getString(AppConstants.kToken);
+
+    try {
+      final response =
+          await apiService.delete("/wishlist/$productId", headers: {
+        // "Authorization": "Bearer $token", //if API requires Bearer
+        "token": token,
+      });
+      log("Deleted successfully: $response");
+      return const Right("success");
+    } on CustomException catch (e) {
+      return Left(ServerFailure(errMessage: e.message));
+    }
   }
 
   @override
-  Future<Either<Failure, String>> removeFromFavorites(
-      {required String productId}) async {
-    final token = Prefs.getString(AppConstants.kToken);
-
+  Future<Either<Failure, String>> removeAllFavorites() async {
     try {
-      final response = await getIt
-          .get<ApiService>()
-          .delete("/wishlist/$productId", headers: {
-       // "Authorization": "Bearer $token", //if API requires Bearer
-        "token": token,  
-      });
-      log("Deleted successfully: $response");
+      final response = await apiService.delete(
+        "/wishlist",
+        headers: {
+          "token": token,
+        },
+      );
+      log(response);
       return const Right("success");
     } on CustomException catch (e) {
       return Left(ServerFailure(errMessage: e.message));
