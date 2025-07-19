@@ -38,8 +38,12 @@ Future<void> cacheFavorites(List<Data> products) async {
         favorites.add(product);
       }
     }
-    return favorites;
+    return  favorites;
+   
   }
+
+
+
  Future<void> updateProductAttributeById({
     required String productId,
     required String attribute,
@@ -123,4 +127,15 @@ Future<void> cacheFavorites(List<Data> products) async {
     return product;
   }
   
+ updateFetchedIsFavorite( {required List<Data> fetchedFavorites}) {
+    final favoriteProducts = fetchedFavorites;
+    for (var product in favoriteProducts) {
+      updateProductAttributeById(
+        productId: product.id!,
+        attribute: "isFavorite",
+        newValue: true,
+      );
+    }
+  }
+
   }

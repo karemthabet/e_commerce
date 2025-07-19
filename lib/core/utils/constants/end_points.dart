@@ -8,8 +8,7 @@ abstract class EndPoints {
   static const String categories = "categories";
   static const String brands = "brands";
   static const String products = "products";
-  static const String postFavorite = "wishlist";
-  //static const String getFavorite = "/wishlist" ;
-  //static const String deleteFavorite = "wishlist/";
+  static const String favorite = "wishlist";
+ 
 
 }

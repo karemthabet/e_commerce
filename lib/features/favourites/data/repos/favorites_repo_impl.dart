@@ -18,44 +18,42 @@ class FavoritesRepoImpl implements FavoritesRepo {
     token = Prefs.getString(AppConstants.kToken);
   }
 
-  /// ************************ LOCALLY *****************************************
-
   // get all favorites
- @override
-Future<Either<Failure, List<Data>>> getFavorites() async {
-  try {
-    // ✅ 1) Check local cache first
-    List<Data> cachedFavorites = hiveService.getFavoriteProducts();
-    if (cachedFavorites.isNotEmpty) {
-      return Right(cachedFavorites);
+  @override
+  Future<Either<Failure, List<Data>>> getFavorites() async {
+    try {
+      //  step 1- Check local cache first
+      List<Data> cachedFavorites = hiveService.getFavoriteProducts();
+      if (cachedFavorites.isNotEmpty) {
+        return Right(cachedFavorites);
+      }
+
+      // step 2-  Fetch from API if local cache is empty
+      final response = await apiService.get(
+        "/wishlist",
+        headers: {"token": token},
+      );
+
+      log("API Fetched Favorites: ${response.toString()}");
+
+//  Step 3 - Parse API data directly into Data objects
+      final apiFavorites = (response["data"] as List)
+          .map<Data>((e) => Data.fromJson(e))
+          .toList();
+
+//  Step 4 - Cache favorites locally for offline use
+      await hiveService.cacheFavorites(apiFavorites);
+      await hiveService.updateFetchedIsFavorite(fetchedFavorites: apiFavorites);
+
+// final res
+      return Right(apiFavorites);
+    } on CustomException catch (e) {
+      return Left(ServerFailure(errMessage: e.message));
+    } catch (e, s) {
+      log(" getFavorites Error: $e\n$s");
+      return Left(ServerFailure(errMessage: e.toString()));
     }
-
-    // ✅ 2) Fetch from API if local cache is empty
-    final response = await apiService.get(
-      "/wishlist",
-      headers: {"token": token},
-    );
-
-    log("✅ API Fetched Favorites: ${response.toString()}");
-
-    // ✅ 3) Parse API data directly
-    final apiFavorites = (response["data"] as List)
-        .map((e) => Data.fromJson(e)) // no need for ["product"]
-        .toList();
-
-    // ✅ 4) Cache favorites locally for offline use
-    await hiveService.cacheFavorites(
-      apiFavorites.map((p) => Data.fromJson(p.toJson())).toList()
-    );
-
-    return Right(apiFavorites);
-  } on CustomException catch (e) {
-    return Left(ServerFailure(errMessage: e.message));
-  } catch (e, s) {
-    log("❌ getFavorites Error: $e\n$s");
-    return Left(ServerFailure(errMessage: e.toString()));
   }
-}
 
 // update the favorite status in the Local Storage Hive
   @override
@@ -80,7 +78,7 @@ Future<Either<Failure, List<Data>>> getFavorites() async {
       {required String productId}) async {
     // final token = Prefs.getString(AppConstants.kToken);
     try {
-      final response = await apiService.post(EndPoints.postFavorite, data: {
+      final response = await apiService.post(EndPoints.favorite, data: {
         "productId": productId,
       }, headers: {
         // "Authorization": "Bearer $token", // if API requires Bearer
@@ -102,7 +100,7 @@ Future<Either<Failure, List<Data>>> getFavorites() async {
 
     try {
       final response =
-          await apiService.delete("/wishlist/$productId", headers: {
+          await apiService.delete("${EndPoints.favorite}/$productId", headers: {
         // "Authorization": "Bearer $token", //if API requires Bearer
         "token": token,
       });
@@ -117,7 +115,7 @@ Future<Either<Failure, List<Data>>> getFavorites() async {
   Future<Either<Failure, String>> removeAllFavorites() async {
     try {
       final response = await apiService.delete(
-        "/wishlist",
+        EndPoints.favorite,
         headers: {
           "token": token,
         },
