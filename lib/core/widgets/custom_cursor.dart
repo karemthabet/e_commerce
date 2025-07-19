@@ -1,6 +1,4 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:e_commerce/core/utils/colors/app_colors.dart';
 import 'package:e_commerce/core/widgets/general_network_image.dart';
 import 'package:flutter/material.dart';
 

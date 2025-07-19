@@ -11,7 +11,7 @@ class CustomFavorite extends StatefulWidget {
   ProductsHiveService productsService = ProductsHiveService();
   CustomFavorite({
     super.key,
-    required this.product,
+    required this.product,  
   });
 
   @override
@@ -45,8 +45,7 @@ class _CustomFavoriteState extends State<CustomFavorite> {
                         .updateFavoritesHeart(widget.product!);
 
                     // step 2: update the favorite status in the Local Storage Hive
-                    context.read<FavoritesCubit>().updateIsFavoriteAttribute(
-                        widget.product!.id, widget.product!.isFavorite!);
+                    context.read<FavoritesCubit>().updateIsFavoriteAttribute( widget.product!.id! ,widget.product!.isFavorite!);
 
                     // step 3: update the favorites list in the FavoritesCubit  (add - remove)
                     context

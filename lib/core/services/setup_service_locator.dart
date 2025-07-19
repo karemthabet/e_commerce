@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:e_commerce/core/cache/brand_service.dart';
 import 'package:e_commerce/core/cache/category_service.dart';
+import 'package:e_commerce/core/cache/hive_favorites_services.dart';
 import 'package:e_commerce/core/cache/hive_product_services.dart';
 import 'package:e_commerce/features/auth/data/repos/auth_repo.dart';
 import 'package:e_commerce/features/auth/data/repos/auth_repo_impl.dart';
@@ -29,6 +30,7 @@ void setupServiceLocator() {
   getIt.registerLazySingleton<ProductsHiveService>(() => ProductsHiveService());
   getIt.registerLazySingleton<CategoryHiveService>(() => CategoryHiveService());
   getIt.registerLazySingleton<BrandHiveService>(() => BrandHiveService());
+  getIt.registerLazySingleton<FavoritesHiveService>(() => FavoritesHiveService()); // ✅ ADD THIS
 
   // Repositories
   getIt.registerLazySingleton<HomeRepo>(() => HomeRepoImpl(
@@ -48,12 +50,12 @@ void setupServiceLocator() {
 
   getIt.registerLazySingleton<FavoritesRepo>(() => FavoritesRepoImpl(
         apiService: getIt<ApiService>(),
-        hiveService: getIt<ProductsHiveService>(),
+        hiveService: getIt<FavoritesHiveService>(),
       ));
 
   // Cubits
   getIt.registerFactory(() => ProductsCubit(getIt.get<ProductRepo>()));
   getIt.registerFactory(() => CategoryCubit(getIt.get<HomeRepo>()));
   getIt.registerFactory(() => BrandCubit(getIt.get<HomeRepo>()));
-  getIt.registerFactory(() => FavoritesCubit(getIt.get<FavoritesRepo>())); // ✅ Added
+  getIt.registerFactory(() => FavoritesCubit(getIt.get<FavoritesRepo>()));
 }

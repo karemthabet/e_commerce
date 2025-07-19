@@ -1,6 +1,7 @@
 
 import 'package:e_commerce/core/cache/brand_service.dart';
 import 'package:e_commerce/core/cache/category_service.dart';
+import 'package:e_commerce/core/cache/hive_favorites_services.dart';
 import 'package:e_commerce/core/cache/hive_product_services.dart';
 import 'package:e_commerce/core/cache/prefs.dart';
 import 'package:e_commerce/core/services/setup_service_locator.dart';
@@ -24,9 +25,12 @@ void main() async {
   Hive.registerAdapter(AllCategoriesOrBrandsAdapter());
   Hive.registerAdapter(CategoryDataOrBrandsAdapter());
   Hive.registerAdapter(MetadataAdapter());
+ // Hive.registerAdapter()
+
   await Hive.openBox<Data>(ProductsHiveService.boxName);
   await Hive.openBox<CategoryDataOrBrands>(CategoryHiveService.boxName);
   await Hive.openBox<CategoryDataOrBrands>(BrandHiveService.boxBrand);
+  await Hive.openBox<Data>(FavoritesHiveService.boxName);
   await Prefs.init();
   setupServiceLocator();
   //hide status bar
