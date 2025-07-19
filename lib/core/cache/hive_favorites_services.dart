@@ -8,13 +8,13 @@ class FavoritesHiveService {
 
   final Box<Data> _box = Hive.box<Data>(boxName);
 
-  /// ✅ Cache all products (overwrites existing)
+  // Cache all products (overwrites existing)
   Future<void> cacheFavorites(Data product) async {
     await _box.put(product.id, product);
   }
 
-  /// ✅ Delete a single product by its Hive key (index)
-  /// Returns true if deleted, false if not found
+  // Delete a single product by its Hive key (index)
+  //Returns true if deleted, false if not found
   Future<void> removeFromFavorites(Data product) async {
     return _box.delete(product.id);
   }
@@ -24,13 +24,13 @@ class FavoritesHiveService {
     await _box.clear();
   }
 
-  /// ✅ Get all cached products
+  // Get all cached products
   List<Data> getCachedFavorites() {
     log("length of get is ${_box.values.toList().length}");
     return _box.values.toList();
   }
 
-  /// ✅ Update a single attribute for a product by its Hive key (index)
+  // Update a single attribute for a product by its Hive key (index)
   Future<void> updateProductAttributeById({
     required String productId,
     required String attribute,
@@ -38,8 +38,6 @@ class FavoritesHiveService {
   }) async {
 var productsBox = Hive.box<Data>('productsBox');
 
-    
-    
     // Find the index of the product with the given ID
     final index =
         productsBox.values.toList().indexWhere((product) => product.id == productId);

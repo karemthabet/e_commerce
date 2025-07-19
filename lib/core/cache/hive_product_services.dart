@@ -6,7 +6,7 @@ class ProductsHiveService {
 
   final Box<Data> _box = Hive.box<Data>(boxName);
 
-  /// ✅ Cache all products (overwrites existing)
+  // Cache all products (overwrites existing)
   Future<void> cacheProducts(List<Data> products) async {
     await _box.clear();
     for (var product in products) {
@@ -14,12 +14,18 @@ class ProductsHiveService {
     }
   }
 
-  /// ✅ Get all cached products
+  //Get all cached products
   List<Data> getCachedProducts() {
     return _box.values.toList();
   }
 
-  /// ✅ Update a single attribute for a product by its Hive key (index)
+// get favorites
+  List<Data> getCachedProducts() {
+    return _box.values.toList();
+  }
+
+
+  // Update a single attribute for a product by its Hive key (index)
   Future<void> updateProductAttributeById({
     required String productId,
     required String attribute,
@@ -44,7 +50,7 @@ class ProductsHiveService {
     await _box.putAt(index, updatedProduct);
   }
 
-  /// ✅ Helper method to update one attribute dynamically
+  // Helper method to update one attribute dynamically
   Data _updateProductAttribute(
       Data product, String attribute, dynamic newValue) {
     switch (attribute) {
