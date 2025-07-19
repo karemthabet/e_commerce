@@ -1,8 +1,10 @@
 
 import 'package:hive/hive.dart';
 
+part 'sub_category_model.g.dart';
+
 @HiveType(typeId: 5)
-class Subcategory {
+class Subcategory  extends HiveObject{
   @HiveField(0)
   String? id;
 

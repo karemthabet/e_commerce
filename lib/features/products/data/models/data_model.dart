@@ -3,6 +3,8 @@ import 'package:e_commerce/features/products/data/models/brand_model.dart';
 import 'package:e_commerce/features/products/data/models/category_model.dart' show Category;
 import 'package:e_commerce/features/products/data/models/sub_category_model.dart';
 import 'package:hive/hive.dart';
+part 'data_model.g.dart';
+
 
 @HiveType(typeId: 4)
 class Data extends HiveObject {

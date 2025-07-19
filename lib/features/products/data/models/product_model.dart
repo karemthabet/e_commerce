@@ -1,12 +1,8 @@
 import 'package:e_commerce/features/home/data/models/categories_or_brand_model.dart';
-import 'package:e_commerce/features/products/data/models/brand_model.dart';
-import 'package:e_commerce/features/products/data/models/category_model.dart';
 import 'package:e_commerce/features/products/data/models/data_model.dart';
-import 'package:e_commerce/features/products/data/models/sub_category_model.dart';
 import 'package:hive/hive.dart';
-part 'product_model.g.dart';
 
-class ProductsModel {
+class ProductsModel  extends HiveObject{
   int? results;
   Metadata? metadata;
   List<Data>? data;
