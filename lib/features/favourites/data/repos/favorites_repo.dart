@@ -3,7 +3,6 @@ import 'package:e_commerce/core/errors/failure.dart';
 import 'package:e_commerce/features/products/data/models/data_model.dart';
 
 abstract class FavoritesRepo {
-  /// ************************ LOCALLY *****************************************
 
   // add to favorites LIST
   Future<Either<Failure, String>> addToFavorites({required String productId});

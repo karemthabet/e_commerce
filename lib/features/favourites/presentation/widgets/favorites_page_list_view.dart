@@ -39,7 +39,7 @@ class FavoritesPageListView extends StatelessWidget {
           }
 
           if (state is GetFavoritesSuccessState) {
-            final List favorites = state.favorites;
+            final  favorites = state.favorites;
 
             if (favorites.isEmpty) {
               return Column(

@@ -6,8 +6,8 @@ import 'package:hive/hive.dart';
 
 class ProductsHiveService {
   static const String boxName = 'productsBox';
-
   final Box<Data> _box = Hive.box<Data>(boxName);
+  final Box<Data> favoriteBox = Hive.box<Data>("favoritesBox");
 
   // Cache all products (overwrites existing)
   Future<void> cacheProducts(List<Data> products) async {
@@ -22,6 +22,13 @@ class ProductsHiveService {
     return _box.values.toList();
   }
 
+// cach favorite products
+Future<void> cacheFavorites(List<Data> products) async {
+    await favoriteBox.clear();
+    for (var product in products) {
+      await favoriteBox.add(product);
+    }
+  }
 // get favorites
   List<Data> getFavoriteProducts() {
     List<Data> favorites = [];

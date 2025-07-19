@@ -1,12 +1,10 @@
 import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 import 'package:e_commerce/core/cache/hive_product_services.dart';
 import 'package:e_commerce/core/cache/prefs.dart';
 import 'package:e_commerce/core/errors/exception.dart';
 import 'package:e_commerce/core/errors/failure.dart';
 import 'package:e_commerce/core/services/api_service.dart';
-import 'package:e_commerce/core/services/setup_service_locator.dart';
 import 'package:e_commerce/core/utils/constants/app_constants.dart';
 import 'package:e_commerce/core/utils/constants/end_points.dart';
 import 'package:e_commerce/features/favourites/data/repos/favorites_repo.dart';
@@ -23,21 +21,41 @@ class FavoritesRepoImpl implements FavoritesRepo {
   /// ************************ LOCALLY *****************************************
 
   // get all favorites
-  @override
-  Future<Either<Failure, List<Data>>> getFavorites() {
-    try {
-      List<Data> cachedFavorites = hiveService.getFavoriteProducts();
-      return Future.value(Right(cachedFavorites));
-    } on Exception catch (e) {
-      return Future.value(
-        Left(
-          ServerFailure(
-            errMessage: e.toString(),
-          ),
-        ),
-      );
+ @override
+Future<Either<Failure, List<Data>>> getFavorites() async {
+  try {
+    // ✅ 1) Check local cache first
+    List<Data> cachedFavorites = hiveService.getFavoriteProducts();
+    if (cachedFavorites.isNotEmpty) {
+      return Right(cachedFavorites);
     }
+
+    // ✅ 2) Fetch from API if local cache is empty
+    final response = await apiService.get(
+      "/wishlist",
+      headers: {"token": token},
+    );
+
+    log("✅ API Fetched Favorites: ${response.toString()}");
+
+    // ✅ 3) Parse API data directly
+    final apiFavorites = (response["data"] as List)
+        .map((e) => Data.fromJson(e)) // no need for ["product"]
+        .toList();
+
+    // ✅ 4) Cache favorites locally for offline use
+    await hiveService.cacheFavorites(
+      apiFavorites.map((p) => Data.fromJson(p.toJson())).toList()
+    );
+
+    return Right(apiFavorites);
+  } on CustomException catch (e) {
+    return Left(ServerFailure(errMessage: e.message));
+  } catch (e, s) {
+    log("❌ getFavorites Error: $e\n$s");
+    return Left(ServerFailure(errMessage: e.toString()));
   }
+}
 
 // update the favorite status in the Local Storage Hive
   @override
@@ -111,6 +129,36 @@ class FavoritesRepoImpl implements FavoritesRepo {
     }
   }
 
+/*
+// Alternative method to clear all wishlist items
+// This method fetches all wishlist items and deletes them one by one
+Future<void> clearAllWishlist() async {
+  // 1) Get all wishlist items first
+  final wishlistResponse = await getIt.get<ApiService>().get(
+    "/wishlist",
+    headers: {
+      "token": token,
+    },
+  );
+
+  List<dynamic> wishlist = wishlistResponse["data"]; 
+
+  // 2) Loop through and delete each item
+  for (var item in wishlist) {
+    String wishlistItemId = item["_id"]; // make sure this is correct key
+
+    await getIt.get<ApiService>().delete(
+      "/wishlist/$wishlistItemId",
+      headers: {
+        "token": token,
+      },
+    );
+  }
+
+  log("All wishlist items deleted!");
+}
+
+*/
   /*
 
   // add to favorites

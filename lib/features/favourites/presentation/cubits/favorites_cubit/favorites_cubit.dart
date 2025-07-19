@@ -1,4 +1,3 @@
-
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
@@ -15,8 +14,8 @@ class FavoritesCubit extends Cubit<FavoritesState> {
     product.isFavorite = !product.isFavorite!;
     emit(UpdateFavoritesHeartSuccessState());
   }
-updateIsFavoriteAttribute(
-      String productId, bool newValue) async {
+
+  updateIsFavoriteAttribute(String productId, bool newValue) async {
     final result = await favoritesRepo.updateProductAttributeById(
       productId: productId,
       attribute: "isFavorite",
@@ -31,13 +30,15 @@ updateIsFavoriteAttribute(
   getFavorites() async {
     emit(FavoritesLoadingState());
     final result = await favoritesRepo.getFavorites();
-    result.fold((failure) => emit(GetFavoritesFailureState(failure.errMessage)),
-        (success) => emit(GetFavoritesSuccessState(success)));
+    result.fold(
+      (failure) => emit(GetFavoritesFailureState(failure.errMessage)),
+      (success) => emit(GetFavoritesSuccessState(success)),
+    );
   }
 
   addToFav(String productId) async {
     emit(FavoritesLoadingState());
-    final result = await favoritesRepo.addToFavorites(productId : productId);
+    final result = await favoritesRepo.addToFavorites(productId: productId);
     result.fold(
       (failure) => emit(AddToFavoritesFailureState(failure.errMessage)),
       (success) => emit(AddToFavoritesSuccessState()),
@@ -46,7 +47,8 @@ updateIsFavoriteAttribute(
 
   deleteFromFav(String productId) async {
     emit(FavoritesLoadingState());
-    final result = await favoritesRepo.removeFromFavorites(productId:  productId);
+    final result =
+        await favoritesRepo.removeFromFavorites(productId: productId);
     result.fold(
         (failure) => emit(DeleteFromFavoritesFailureState(failure.errMessage)),
         (success) => emit(DeleteFromFavoritesSuccessState()));
