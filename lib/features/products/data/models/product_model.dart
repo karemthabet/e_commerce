@@ -23,8 +23,8 @@ class ProductsModel {
     if (metadata != null) {
       _data["metadata"] = metadata!.toJson();
     }
-    if (this.data != null) {
-      _data["data"] = this.data!.map((e) => e.toJson()).toList();
+    if (data != null) {
+      _data["data"] = data!.map((e) => e.toJson()).toList();
     }
     return _data;
   }
@@ -33,7 +33,7 @@ class ProductsModel {
 
 
 @HiveType(typeId: 4)
-class Data {
+class Data extends HiveObject {
   @HiveField(0)
   int? sold;
 

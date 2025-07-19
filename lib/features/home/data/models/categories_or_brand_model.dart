@@ -31,7 +31,7 @@ class AllCategoriesOrBrands {
 }
 
 @HiveType(typeId: 11)
-class CategoryDataOrBrands {
+class CategoryDataOrBrands extends HiveObject {
   @HiveField(0)
   String? id;
 
