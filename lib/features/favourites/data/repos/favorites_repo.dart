@@ -6,9 +6,9 @@ abstract class FavoritesRepo {
   /// ************************ LOCALLY *****************************************
 
   // add to favorites LIST
-   Future<Either<Failure, List<Data>>> addToFavorites({required Data product});
+  Future<Either<Failure, String>> addToFavorites({required String productId});
   // remove from favorites LIST
- Future<Either<Failure, List<Data>>> removeFromFavorites({required Data product});
+ Future<Either<Failure, String>> removeFromFavorites({required String productId});
   // remove all favorites
  Future<Either<Failure, List<Data>>> removeAllFavorites();
   // get all favorites
@@ -19,6 +19,5 @@ abstract class FavoritesRepo {
 
 
 
-/// ************************ REMOTELY *****************************************
   
 }

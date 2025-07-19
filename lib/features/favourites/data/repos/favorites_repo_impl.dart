@@ -1,7 +1,14 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:e_commerce/core/cache/hive_product_services.dart';
+import 'package:e_commerce/core/cache/prefs.dart';
+import 'package:e_commerce/core/errors/exception.dart';
 import 'package:e_commerce/core/errors/failure.dart';
 import 'package:e_commerce/core/services/api_service.dart';
+import 'package:e_commerce/core/services/setup_service_locator.dart';
+import 'package:e_commerce/core/utils/constants/app_constants.dart';
+import 'package:e_commerce/core/utils/constants/end_points.dart';
 import 'package:e_commerce/features/favourites/data/repos/favorites_repo.dart';
 import 'package:e_commerce/features/products/data/models/data_model.dart';
 
@@ -12,7 +19,6 @@ class FavoritesRepoImpl implements FavoritesRepo {
   FavoritesRepoImpl({required this.apiService, required this.hiveService});
 
   /// ************************ LOCALLY *****************************************
-
 
   // get all favorites
   @override
@@ -31,25 +37,12 @@ class FavoritesRepoImpl implements FavoritesRepo {
     }
   }
 
-  @override
-  Future<Either<Failure, List<Data>>> addToFavorites({required Data product}) {
-    throw UnimplementedError();
-  }
-  
-  @override
-  Future<Either<Failure, List<Data>>> removeAllFavorites() {
-    throw UnimplementedError();
-  }
-  
-  @override
-  Future<Either<Failure, List<Data>>> removeFromFavorites({required Data product}) {
-    throw UnimplementedError();
-  }
-
 // update the favorite status in the Local Storage Hive
   @override
   Future<Either<Failure, String>> updateProductAttributeById(
-      {required String productId, required String attribute, bool newValue = false}) {
+      {required String productId,
+      required String attribute,
+      bool newValue = false}) {
     try {
       hiveService.updateProductAttributeById(
         productId: productId,
@@ -59,6 +52,50 @@ class FavoritesRepoImpl implements FavoritesRepo {
       return Future.value(const Right("Success"));
     } on Exception catch (e) {
       return Future.value(Left(ServerFailure(errMessage: e.toString())));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> addToFavorites(
+      {required String productId}) async {
+    final token = Prefs.getString(AppConstants.kToken);
+    try {
+      final response = await apiService.post(EndPoints.postFavorite, data: {
+        "productId": productId,
+      }, headers: {
+       // "Authorization": "Bearer $token", // if API requires Bearer
+          "token": token,  
+      });
+
+      log(" Wishlist Response: $response");
+
+      return const Right("success");
+    } on CustomException catch (e) {
+      return Left(ServerFailure(errMessage: e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Data>>> removeAllFavorites() {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<Failure, String>> removeFromFavorites(
+      {required String productId}) async {
+    final token = Prefs.getString(AppConstants.kToken);
+
+    try {
+      final response = await getIt
+          .get<ApiService>()
+          .delete("/wishlist/$productId", headers: {
+       // "Authorization": "Bearer $token", //if API requires Bearer
+        "token": token,  
+      });
+      log("Deleted successfully: $response");
+      return const Right("success");
+    } on CustomException catch (e) {
+      return Left(ServerFailure(errMessage: e.message));
     }
   }
 
@@ -125,6 +162,4 @@ class FavoritesRepoImpl implements FavoritesRepo {
     }
   }
 */
-
-
 }

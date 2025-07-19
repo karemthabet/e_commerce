@@ -65,24 +65,6 @@ class FavoritesPageListView extends StatelessWidget {
                 itemCount: favorites.length,
               );
             }
-          } else if (state is AddToFavoritesSuccessState) {
-            final favorites = state.favorites;
-            return ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              itemBuilder: (context, index) {
-                return FavoritesItem(product: favorites[index]);
-              },
-              itemCount: favorites.length,
-            );
-          } else if (state is DeleteFromFavoritesSuccessState) {
-            final favorites = state.favorites;
-            return ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              itemBuilder: (context, index) {
-                return FavoritesItem(product: favorites[index]);
-              },
-              itemCount: favorites.length,
-            );
           } else {
             return Center(
               child: Text(

@@ -44,20 +44,20 @@ final class GetFavoritesFailureState extends FavoritesState {
 
 // add
 final class AddToFavoritesSuccessState extends FavoritesState {
-  final List<Data> favorites;
-
-  const AddToFavoritesSuccessState(this.favorites);
+  
 }
 
 final class AddToFavoritesFailureState extends FavoritesState {
   final String error;
-  const AddToFavoritesFailureState(this.error);
+   AddToFavoritesFailureState(this.error){
+      log(error);
+
+  }
 }
 
 // delete
 final class DeleteFromFavoritesSuccessState extends FavoritesState {
-  final List<Data> favorites;
-  const DeleteFromFavoritesSuccessState(this.favorites);
+
 }
 
 final class DeleteFromFavoritesFailureState extends FavoritesState {

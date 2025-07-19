@@ -49,7 +49,7 @@ class _CustomFavoriteState extends State<CustomFavorite> {
                         widget.product!.id!, widget.product!.isFavorite!);
 
                     // step 3: update the favorites list in the FavoritesCubit  (add - remove)
-                    //     context.read<FavoritesCubit>() .updateFavoritesList(widget.product!);
+                         context.read<FavoritesCubit>() .updateFavoritesList(widget.product!);
                   }
                 },
               );
