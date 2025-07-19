@@ -1,7 +1,6 @@
 import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
-import 'package:e_commerce/core/cache/hive_favorites_services.dart';
+import 'package:e_commerce/core/cache/hive_product_services.dart';
 import 'package:e_commerce/core/errors/failure.dart';
 import 'package:e_commerce/core/services/api_service.dart';
 import 'package:e_commerce/features/favourites/data/repos/favorites_repo.dart';
@@ -9,11 +8,44 @@ import 'package:e_commerce/features/products/data/models/product_model.dart';
 
 class FavoritesRepoImpl implements FavoritesRepo {
   final ApiService apiService;
-  final FavoritesHiveService hiveService;
+  final ProductsHiveService hiveService;
 
   FavoritesRepoImpl({required this.apiService, required this.hiveService});
 
   /// ************************ LOCALLY *****************************************
+
+
+  // get all favorites
+  @override
+  Future<Either<Failure, List<Data>>> getFavorites() {
+    try {
+      List<Data> cachedFavorites = hiveService.getFavoriteProducts();
+      return Future.value(Right(cachedFavorites));
+    } on Exception catch (e) {
+      return Future.value(
+        Left(
+          ServerFailure(
+            errMessage: e.toString(),
+          ),
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Data>>> addToFavorites({required Data product}) {
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<Either<Failure, List<Data>>> removeAllFavorites() {
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<Either<Failure, List<Data>>> removeFromFavorites({required Data product}) {
+    throw UnimplementedError();
+  }
 
 // update the favorite status in the Local Storage Hive
   @override
@@ -30,6 +62,8 @@ class FavoritesRepoImpl implements FavoritesRepo {
       return Future.value(Left(ServerFailure(errMessage: e.toString())));
     }
   }
+
+  /*
 
   // add to favorites
   @override
@@ -49,7 +83,8 @@ class FavoritesRepoImpl implements FavoritesRepo {
       );
     }
   }
-
+*/
+/*
   // remove from favorites
   @override
   Future<Either<Failure, List<Data>>> removeFromFavorites(
@@ -70,6 +105,8 @@ class FavoritesRepoImpl implements FavoritesRepo {
     }
   }
 
+  */
+/*
   // remove all favorites
   @override
   Future<Either<Failure, List<Data>>> removeAllFavorites() async {
@@ -88,45 +125,7 @@ class FavoritesRepoImpl implements FavoritesRepo {
       );
     }
   }
+*/
 
-  // get all favorites
-  @override
-  Future<Either<Failure, List<Data>>> getFavorites() {
-    try {
-      List<Data> cachedFavorites = hiveService.getCachedFavorites();
-      return Future.value(Right(cachedFavorites));
-    } on Exception catch (e) {
-      return Future.value(
-        Left(
-          ServerFailure(
-            errMessage: e.toString(),
-          ),
-        ),
-      );
-    }
-  }
 
-  // update the favorite status in the Database
-  @override
-  Future<Either<Failure, String>> updateProductIsFavorite({
-    required String productId,
-    required bool isFavorite,
-  }) async {
-    try {
-      final response = await apiService.patch(
-        "/products/$productId", // Or your specific API endpoint
-        data: {
-          "isFavorite": isFavorite,
-        },
-      );
-      log("Favorite status updated: $response");
-
-      return Future.value(
-          const Right("isFavorite updated in Database successfully"));
-    } on Exception catch (e) {
-      return Future.value(Left(ServerFailure(errMessage: e.toString())));
-    }
-
-    // Optionally, you can handle response or update local cache here
-  }
 }

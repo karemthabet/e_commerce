@@ -11,7 +11,7 @@ class CustomFavorite extends StatefulWidget {
   ProductsHiveService productsService = ProductsHiveService();
   CustomFavorite({
     super.key,
-    required this.product,  
+    required this.product,
   });
 
   @override
@@ -34,9 +34,9 @@ class _CustomFavoriteState extends State<CustomFavorite> {
               return IconButton(
                 icon: Icon(Icons.favorite,
                     size: 18,
-                    color: (widget.product?.isFavorite == false)
-                        ? AppColors.grey300
-                        : AppColors.pink),
+                    color: (widget.product?.isFavorite == true)
+                        ? AppColors.pink
+                        : AppColors.grey300),
                 onPressed: () async {
                   if (widget.product?.isFavorite != null) {
                     // step 1: toggle the favorite Heart UI
@@ -45,10 +45,11 @@ class _CustomFavoriteState extends State<CustomFavorite> {
                         .updateFavoritesHeart(widget.product!);
 
                     // step 2: update the favorite status in the Local Storage Hive
-                    context.read<FavoritesCubit>().updateIsFavoriteAttribute( widget.product!.id! ,widget.product!.isFavorite!);
+                    context.read<FavoritesCubit>().updateIsFavoriteAttribute(
+                        widget.product!.id!, widget.product!.isFavorite!);
 
                     // step 3: update the favorites list in the FavoritesCubit  (add - remove)
-               //     context.read<FavoritesCubit>() .updateFavoritesList(widget.product!);
+                    //     context.read<FavoritesCubit>() .updateFavoritesList(widget.product!);
                   }
                 },
               );

@@ -20,13 +20,17 @@ class ProductsHiveService {
   }
 
 // get favorites
-  List<Data> getCachedProducts() {
-    return _box.values.toList();
+  List<Data> getFavoriteProducts() {
+    List<Data> favorites = [];
+    final allProducts = _box.values.toList();
+    for (var product in allProducts) {
+      if (product.isFavorite == true) {
+        favorites.add(product);
+      }
+    }
+    return favorites;
   }
-
-
-  // Update a single attribute for a product by its Hive key (index)
-  Future<void> updateProductAttributeById({
+ Future<void> updateProductAttributeById({
     required String productId,
     required String attribute,
     required dynamic newValue,
@@ -41,11 +45,9 @@ class ProductsHiveService {
 
     // Get the existing product
     Data existingProduct = _box.getAt(index)!;
-
     // Update the attribute
     final updatedProduct =
         _updateProductAttribute(existingProduct, attribute, newValue);
-
     // Save it back to Hive
     await _box.putAt(index, updatedProduct);
   }
@@ -110,4 +112,5 @@ class ProductsHiveService {
     }
     return product;
   }
-}
+  
+  }

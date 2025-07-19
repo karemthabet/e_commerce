@@ -20,9 +20,5 @@ abstract class FavoritesRepo {
 
 
 /// ************************ REMOTELY *****************************************
-  // update remotely
-  Future<Either<Failure, String>> updateProductIsFavorite({
-    required String productId,
-    required bool isFavorite,
-  });
+  
 }

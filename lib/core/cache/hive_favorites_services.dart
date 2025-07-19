@@ -1,12 +1,12 @@
 import 'dart:developer';
-
 import 'package:e_commerce/features/products/data/models/product_model.dart';
 import 'package:hive/hive.dart';
 
 class FavoritesHiveService {
   static const String boxName = 'favoritesBox';
-
   final Box<Data> _box = Hive.box<Data>(boxName);
+  final Box<Data> productsBox = Hive.box<Data>('productsBox');
+
 
   // Cache all products (overwrites existing)
   Future<void> cacheFavorites(Data product) async {
@@ -36,7 +36,6 @@ class FavoritesHiveService {
     required String attribute,
     required dynamic newValue,
   }) async {
-var productsBox = Hive.box<Data>('productsBox');
 
     // Find the index of the product with the given ID
     final index =
@@ -57,7 +56,7 @@ var productsBox = Hive.box<Data>('productsBox');
     await productsBox.putAt(index, updatedProduct);
   }
 
-  /// ✅ Helper method to update one attribute dynamically
+  // Helper method to update one attribute dynamically
   Data _updateProductAttribute(
       Data product, String attribute, dynamic newValue) {
     switch (attribute) {

@@ -50,7 +50,7 @@ void setupServiceLocator() {
 
   getIt.registerLazySingleton<FavoritesRepo>(() => FavoritesRepoImpl(
         apiService: getIt<ApiService>(),
-        hiveService: getIt<FavoritesHiveService>(),
+        hiveService: getIt<ProductsHiveService>(),
       ));
 
   // Cubits
