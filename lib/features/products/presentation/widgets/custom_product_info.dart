@@ -1,7 +1,7 @@
 import 'package:e_commerce/core/utils/colors/app_colors.dart';
 import 'package:e_commerce/core/utils/styles/app_styles.dart';
 import 'package:e_commerce/core/widgets/general_network_image.dart';
-import 'package:e_commerce/features/products/data/models/product_model.dart';
+import 'package:e_commerce/features/products/data/models/data_model.dart';
 import 'package:e_commerce/core/widgets/custom_favorite.dart';
 import 'package:e_commerce/features/products/presentation/cubits/product_cubit/products_cubit.dart';
 import 'package:e_commerce/features/products/presentation/pages/product_details_view.dart';

@@ -1,10 +1,9 @@
-import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:e_commerce/core/cache/hive_product_services.dart';
 import 'package:e_commerce/core/errors/failure.dart';
 import 'package:e_commerce/core/services/api_service.dart';
 import 'package:e_commerce/features/favourites/data/repos/favorites_repo.dart';
-import 'package:e_commerce/features/products/data/models/product_model.dart';
+import 'package:e_commerce/features/products/data/models/data_model.dart';
 
 class FavoritesRepoImpl implements FavoritesRepo {
   final ApiService apiService;

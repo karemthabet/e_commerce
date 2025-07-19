@@ -1,5 +1,5 @@
 import 'package:e_commerce/features/favourites/presentation/widgets/favorites_item_container_body.dart';
-import 'package:e_commerce/features/products/data/models/product_model.dart';
+import 'package:e_commerce/features/products/data/models/data_model.dart';
 import 'package:flutter/material.dart';
 
 class FavoritesItem extends StatelessWidget {

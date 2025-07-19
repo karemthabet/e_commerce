@@ -8,7 +8,7 @@ import 'package:e_commerce/features/auth/presentation/pages/verification_code_pa
 import 'package:e_commerce/features/favourites/presentation/pages/favorites_page.dart';
 import 'package:e_commerce/features/home/presentation/Pages/home_page.dart';
 import 'package:e_commerce/features/onBording/presentation/pages/on_bording_page.dart';
-import 'package:e_commerce/features/products/data/models/product_model.dart';
+import 'package:e_commerce/features/products/data/models/data_model.dart';
 import 'package:e_commerce/features/products/presentation/pages/product_details_view.dart';
 import 'package:e_commerce/features/splash/presentation/pages/splash_page.dart';
 import 'package:go_router/go_router.dart';

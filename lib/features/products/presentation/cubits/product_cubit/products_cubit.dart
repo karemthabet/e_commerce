@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:e_commerce/features/products/data/models/data_model.dart';
 import 'package:e_commerce/features/products/data/models/product_model.dart';
 import 'package:e_commerce/features/products/data/repos/product_repo.dart';
 import 'package:equatable/equatable.dart';

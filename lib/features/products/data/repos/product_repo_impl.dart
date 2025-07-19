@@ -4,7 +4,7 @@ import 'package:e_commerce/core/errors/exception.dart';
 import 'package:e_commerce/core/errors/failure.dart';
 import 'package:e_commerce/core/services/api_service.dart';
 import 'package:e_commerce/core/utils/constants/end_points.dart';
-import 'package:e_commerce/features/products/data/models/product_model.dart';
+import 'package:e_commerce/features/products/data/models/data_model.dart';
 import 'package:e_commerce/features/products/data/repos/product_repo.dart';
 
 class ProductRepoImpl extends ProductRepo {

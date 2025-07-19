@@ -1,4 +1,4 @@
-import 'package:e_commerce/features/products/data/models/product_model.dart';
+import 'package:e_commerce/features/products/data/models/data_model.dart';
 
 class ProductSizeHelper {
   static List<String> getSizesForProduct(Data product) {

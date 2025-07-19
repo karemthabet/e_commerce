@@ -1,4 +1,7 @@
-import 'package:e_commerce/features/products/data/models/product_model.dart';
+import 'package:e_commerce/features/products/data/models/brand_model.dart';
+import 'package:e_commerce/features/products/data/models/category_model.dart';
+import 'package:e_commerce/features/products/data/models/data_model.dart';
+import 'package:e_commerce/features/products/data/models/sub_category_model.dart';
 import 'package:hive/hive.dart';
 
 class ProductsHiveService {

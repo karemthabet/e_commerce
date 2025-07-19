@@ -1,7 +1,7 @@
 
 import 'package:bloc/bloc.dart';
 import 'package:e_commerce/features/favourites/data/repos/favorites_repo.dart';
-import 'package:e_commerce/features/products/data/models/product_model.dart';
+import 'package:e_commerce/features/products/data/models/data_model.dart';
 part 'favorites_state.dart';
 
 class FavoritesCubit extends Cubit<FavoritesState> {
