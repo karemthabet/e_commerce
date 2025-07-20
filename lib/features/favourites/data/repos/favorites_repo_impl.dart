@@ -13,7 +13,7 @@ import 'package:e_commerce/features/products/data/models/data_model.dart';
 class FavoritesRepoImpl implements FavoritesRepo {
   final ApiService apiService;
   final ProductsHiveService hiveService;
-  late final token;
+  late final String? token;
   FavoritesRepoImpl({required this.apiService, required this.hiveService}) {
     token = Prefs.getString(AppConstants.kToken);
   }
@@ -42,7 +42,7 @@ class FavoritesRepoImpl implements FavoritesRepo {
           .toList();
 
 //  Step 4 - Cache favorites locally for offline use
-      await hiveService.cacheFavorites(apiFavorites);
+     // await hiveService.cacheFavorites(apiFavorites);
       await hiveService.updateFetchedIsFavorite(fetchedFavorites: apiFavorites);
 
 // final res

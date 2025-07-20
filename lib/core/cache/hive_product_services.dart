@@ -22,13 +22,7 @@ class ProductsHiveService {
     return _box.values.toList();
   }
 
-// cach favorite products
-Future<void> cacheFavorites(List<Data> products) async {
-    await favoriteBox.clear();
-    for (var product in products) {
-      await favoriteBox.add(product);
-    }
-  }
+
 // get favorites
   List<Data> getFavoriteProducts() {
     List<Data> favorites = [];
@@ -64,6 +58,7 @@ Future<void> cacheFavorites(List<Data> products) async {
         _updateProductAttribute(existingProduct, attribute, newValue);
     // Save it back to Hive
     await _box.putAt(index, updatedProduct);
+    
   }
 
   // Helper method to update one attribute dynamically
