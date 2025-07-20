@@ -7,11 +7,11 @@ class ProductPageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
+    return const CustomScrollView(
       slivers: [
         SliverToBoxAdapter(
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 10),
+            padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 10),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               GeneralAppBar(
@@ -20,7 +20,7 @@ class ProductPageBody extends StatelessWidget {
             ]),
           ),
         ),
-         const CustomProductGridView()
+         CustomProductGridView()
       ],
     );
   }

@@ -22,7 +22,7 @@ class HomePage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                 GeneralAppBar(pageTitle: "𝒮𝒽𝑜𝓅𝓅𝒾𝑒"),
+                 const GeneralAppBar(pageTitle: "𝒮𝒽𝑜𝓅𝓅𝒾𝑒"),
                 const SizedBox(
                   height: 20,
                 ),

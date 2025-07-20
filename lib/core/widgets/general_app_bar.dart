@@ -3,8 +3,8 @@ import 'package:e_commerce/core/widgets/cart_icon.dart';
 import 'package:flutter/material.dart';
 
 class GeneralAppBar extends StatelessWidget {
-GeneralAppBar({super.key, @required this.pageTitle});
-  String? pageTitle;
+const  GeneralAppBar({super.key, required this.pageTitle});
+ final String? pageTitle;
 
   @override
   Widget build(BuildContext context) {

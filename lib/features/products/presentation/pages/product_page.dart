@@ -1,5 +1,4 @@
 import 'package:e_commerce/core/services/setup_service_locator.dart';
-import 'package:e_commerce/features/favourites/presentation/cubits/favorites_cubit/favorites_cubit.dart';
 import 'package:e_commerce/features/products/presentation/cubits/product_cubit/products_cubit.dart';
 import 'package:e_commerce/features/products/presentation/widgets/product_page_body.dart';
 import 'package:flutter/material.dart';

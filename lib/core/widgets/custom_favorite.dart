@@ -8,8 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomFavorite extends StatefulWidget {
   final Data? product;
-  ProductsHiveService productsService = ProductsHiveService();
-  CustomFavorite({
+     ProductsHiveService productsService = ProductsHiveService();
+   CustomFavorite({
     super.key,
     required this.product,
   });
@@ -29,31 +29,35 @@ class _CustomFavoriteState extends State<CustomFavorite> {
         radius: 16,
         child: BlocProvider(
           create: (context) => getIt.get<FavoritesCubit>(),
-          child: BlocBuilder<FavoritesCubit, FavoritesState>(
-            builder: (context, state) {
-              return IconButton(
-                icon: Icon(Icons.favorite,
-                    size: 18,
-                    color: (widget.product?.isFavorite == true)
-                        ? AppColors.pink
-                        : AppColors.grey300),
-                onPressed: () async {
-                  if (widget.product?.isFavorite != null) {
-                    // step 1: toggle the favorite Heart UI
-                    context
-                        .read<FavoritesCubit>()
-                        .updateFavoritesHeart(widget.product!);
-
-                    // step 2: update the favorite status in the Local Storage Hive
-                    context.read<FavoritesCubit>().updateIsFavoriteAttribute(
-                        widget.product!.id!, widget.product!.isFavorite!);
-
-                    // step 3: update the favorites list in the FavoritesCubit  (add - remove)
-                         context.read<FavoritesCubit>() .updateFavoritesList(widget.product!);
-                  }
+          child: Builder(
+            builder: (context) {
+              return BlocBuilder<FavoritesCubit, FavoritesState>(
+                builder: (context, state) {
+                  return IconButton(
+                    icon: Icon(Icons.favorite,
+                        size: 18,
+                        color: (widget.product?.isFavorite == true)
+                            ? AppColors.pink
+                            : AppColors.grey300),
+                    onPressed: () async {
+                      if (widget.product?.isFavorite != null) {
+                        // step 1: toggle the favorite Heart UI
+                        context
+                            .read<FavoritesCubit>()
+                            .updateFavoritesHeart(widget.product!);
+              
+                        // step 2: update the favorite status in the Local Storage Hive
+                        context.read<FavoritesCubit>().updateIsFavoriteAttribute(
+                            widget.product!.id!, widget.product!.isFavorite!);
+              
+                        // step 3: update the favorites list in the FavoritesCubit  (add - remove)
+                             context.read<FavoritesCubit>() .updateFavoritesList(widget.product!);
+                      }
+                    },
+                  );
                 },
               );
-            },
+            }
           ),
         ),
       ),

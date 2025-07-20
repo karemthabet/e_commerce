@@ -6,8 +6,8 @@ class FavoritesPageAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Padding(
-              padding: const EdgeInsets.symmetric(
+    return  const Padding(
+              padding: EdgeInsets.symmetric(
                 horizontal: 12.0,
                 vertical: 8.00,
               ),
