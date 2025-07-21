@@ -5,8 +5,8 @@ import 'package:e_commerce/features/auth/presentation/pages/forgot_password_page
 import 'package:e_commerce/features/auth/presentation/pages/login_page.dart';
 import 'package:e_commerce/features/auth/presentation/pages/reset_password_page.dart';
 import 'package:e_commerce/features/auth/presentation/pages/verification_code_page.dart';
-import 'package:e_commerce/features/changepassword/presentation/pages/change_password_page.dart';
-import 'package:e_commerce/features/editProfile/presentation/pages/edit_profile_page.dart';
+import 'package:e_commerce/features/profile/presentation/pages/change_password_page.dart';
+import 'package:e_commerce/features/profile/presentation/pages/edit_profile_page.dart';
 import 'package:e_commerce/features/favourites/presentation/pages/favorites_page.dart';
 import 'package:e_commerce/features/home/presentation/Pages/home_page.dart';
 import 'package:e_commerce/features/onBording/presentation/pages/on_bording_page.dart';

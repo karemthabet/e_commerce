@@ -1,3 +1,4 @@
+import 'package:e_commerce/features/profile/presentation/widgets/edit_profile_page_body.dart';
 import 'package:flutter/material.dart';
 
 class EditProfilePage extends StatelessWidget {
@@ -5,6 +6,8 @@ class EditProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const Scaffold(
+      body: EditProfilePageBody(),
+    );
   }
 }

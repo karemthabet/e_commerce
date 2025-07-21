@@ -5,7 +5,6 @@ class AppConstants {
   static const String isLoggedIn = 'isLoggedIn';
   static const String kForgottenEmail = 'kForgottenEmail';
   static const String kUserName = 'kUserName';
-  static const String kPhone = 'kPhone';
 
 
 }

@@ -14,6 +14,7 @@ class AppAssets {
   static const String sliderImageThree ='assets/images/Property 1=Default.png';
   static const String profile ='assets/images/profile.jpg';
   static const String changePass ='assets/images/change pass.png';
+  static const String editProfile ='assets/images/edit profile .jpg';
 
 }
 

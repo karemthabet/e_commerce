@@ -5,7 +5,7 @@ import 'package:e_commerce/core/cache/hive_favorites_services.dart';
 import 'package:e_commerce/core/cache/hive_product_services.dart';
 import 'package:e_commerce/features/auth/data/repos/auth_repo.dart';
 import 'package:e_commerce/features/auth/data/repos/auth_repo_impl.dart';
-import 'package:e_commerce/features/changepassword/presentation/cubit/changepassword_cubit.dart';
+import 'package:e_commerce/features/profile/presentation/cubit/changepassword_cubit.dart';
 import 'package:e_commerce/features/favourites/data/repos/favorites_repo.dart';
 import 'package:e_commerce/features/favourites/data/repos/favorites_repo_impl.dart';
 import 'package:e_commerce/features/favourites/presentation/cubits/favorites_cubit/favorites_cubit.dart';

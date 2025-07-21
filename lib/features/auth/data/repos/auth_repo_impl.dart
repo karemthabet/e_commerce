@@ -30,7 +30,6 @@ class AuthRepoImpl implements AuthRepo {
       Prefs.setString(AppConstants.kUserName, userName);
       Prefs.setString(AppConstants.kForgottenEmail, email);
       Prefs.setString(AppConstants.kToken, token);
-      Prefs.setString(AppConstants.kPhone, createAccountRequestModel.phone);
 
       return const Right(null);
     } on CustomException catch (e) {

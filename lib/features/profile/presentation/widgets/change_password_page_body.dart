@@ -4,7 +4,7 @@ import 'package:e_commerce/core/utils/colors/app_colors.dart';
 import 'package:e_commerce/core/utils/styles/app_styles.dart';
 import 'package:e_commerce/core/widgets/general_button.dart';
 import 'package:e_commerce/core/widgets/password_field.dart';
-import 'package:e_commerce/features/changepassword/presentation/cubit/changepassword_cubit.dart';
+import 'package:e_commerce/features/profile/presentation/cubit/changepassword_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -102,19 +102,7 @@ class _ChangePasswordPageBodyState extends State<ChangePasswordPageBody> {
                         text: "Save",
                         backgroundColor: AppColors.blueAccentColor,
                         textColor: AppColors.whiteColor,
-                        onPressed: () {
-                          if (formKey.currentState!.validate()) {
-                            context.read<ChangePasswordCubit>().changePassword(
-                                  rePassword: rePassword.text,
-                                  currentPassword: currentPassword.text,
-                                  newPassword: newPassword.text,
-                                );
-                          } else {
-                            setState(() {
-                              autovalidateMode = AutovalidateMode.always;
-                            });
-                          }
-                        },
+                        onPressed: handleChangePassword,
                       );
                     },
                   )
@@ -123,5 +111,20 @@ class _ChangePasswordPageBodyState extends State<ChangePasswordPageBody> {
             ),
           ),
         ));
+  
+  }
+
+  handleChangePassword() {
+    if (formKey.currentState!.validate()) {
+      context.read<ChangePasswordCubit>().changePassword(
+            rePassword: rePassword.text,
+            currentPassword: currentPassword.text,
+            newPassword: newPassword.text,
+          );
+    } else {
+      setState(() {
+        autovalidateMode = AutovalidateMode.always;
+      });
+    }
   }
 }

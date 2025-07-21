@@ -15,7 +15,6 @@ class ProfilePageBody extends StatelessWidget {
     String userName = Prefs.getString(AppConstants.kUserName)!;
     String email =
         Prefs.getString(AppConstants.kForgottenEmail) !;
-    String phone = Prefs.getString(AppConstants.kPhone) ?? 'No phone';
 
     return SingleChildScrollView(
       child: Padding(
@@ -44,10 +43,7 @@ class ProfilePageBody extends StatelessWidget {
               style: AppStyles.text15,
             ),
             const SizedBox(height: 5),
-            Text(
-              phone,
-              style: AppStyles.text15,
-            ),
+            
             const SizedBox(height: 30),
             BuildProfileOptions(
               icon: Icons.edit,
