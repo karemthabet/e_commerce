@@ -1,0 +1,29 @@
+import 'package:e_commerce/core/cache/brand_service.dart';
+import 'package:e_commerce/core/cache/category_service.dart';
+import 'package:e_commerce/core/cache/hive_favorites_services.dart';
+import 'package:e_commerce/core/cache/hive_product_services.dart';
+import 'package:e_commerce/features/home/data/models/categories_or_brand_model.dart';
+import 'package:e_commerce/features/products/data/models/brand_model.dart';
+import 'package:e_commerce/features/products/data/models/category_model.dart';
+import 'package:e_commerce/features/products/data/models/data_model.dart';
+import 'package:e_commerce/features/products/data/models/sub_category_model.dart';
+import 'package:hive_flutter/adapters.dart';
+
+Future<void> initHive() async {
+  await Hive.initFlutter();
+
+  // Register adapters
+  Hive.registerAdapter(DataAdapter());
+  Hive.registerAdapter(SubcategoryAdapter());
+  Hive.registerAdapter(CategoryAdapter());
+  Hive.registerAdapter(BrandAdapter());
+  Hive.registerAdapter(AllCategoriesOrBrandsAdapter());
+  Hive.registerAdapter(CategoryDataOrBrandsAdapter());
+  Hive.registerAdapter(MetadataAdapter());
+
+  // Open Hive boxes
+  await Hive.openBox<Data>(ProductsHiveService.boxName);
+  await Hive.openBox<CategoryDataOrBrands>(CategoryHiveService.boxName);
+  await Hive.openBox<CategoryDataOrBrands>(BrandHiveService.boxBrand);
+  await Hive.openBox<Data>(FavoritesHiveService.boxName);
+}

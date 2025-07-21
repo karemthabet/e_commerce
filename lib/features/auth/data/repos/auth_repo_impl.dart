@@ -1,15 +1,15 @@
-
 import 'package:dartz/dartz.dart';
+
 import 'package:e_commerce/core/cache/prefs.dart';
 import 'package:e_commerce/core/errors/failure.dart';
 import 'package:e_commerce/core/utils/constants/app_constants.dart';
 import 'package:e_commerce/core/utils/constants/end_points.dart';
 import 'package:e_commerce/features/auth/data/models/create_account_request_model.dart';
+import 'package:e_commerce/features/auth/data/models/login_request_model.dart';
 import 'package:e_commerce/features/auth/data/repos/auth_repo.dart';
 
 import '../../../../core/errors/exception.dart';
 import '../../../../core/services/api_service.dart';
-import '../models/login_request_model.dart';
 
 class AuthRepoImpl implements AuthRepo {
   final ApiService apiService;
@@ -20,12 +20,18 @@ class AuthRepoImpl implements AuthRepo {
     required CreateAccountRequestModel createAccountRequestModel,
   }) async {
     try {
-    final result=  await apiService.post(
+      final result = await apiService.post(
         EndPoints.register,
         data: createAccountRequestModel.toJson(),
       );
-       final String token = result['token'];
+      final String token = result['token'];
+      final String userName = result['user']['name'];
+      final String email = result['user']['email'];
+      Prefs.setString(AppConstants.kUserName, userName);
+      Prefs.setString(AppConstants.kForgottenEmail, email);
       Prefs.setString(AppConstants.kToken, token);
+      Prefs.setString(AppConstants.kPhone, createAccountRequestModel.phone);
+
       return const Right(null);
     } on CustomException catch (e) {
       return left((ServerFailure(errMessage: e.message)));
@@ -42,7 +48,12 @@ class AuthRepoImpl implements AuthRepo {
         data: loginRequestModel.toJson(),
       );
       final String token = result['token'];
+      final String userName = result['user']['name'];
+      final String email = result['user']['email'];
+      Prefs.setString(AppConstants.kUserName, userName);
+      Prefs.setString(AppConstants.kForgottenEmail, email);
       Prefs.setString(AppConstants.kToken, token);
+
       return const Right(null);
     } on CustomException catch (e) {
       return left((ServerFailure(errMessage: e.message)));
@@ -96,6 +107,28 @@ class AuthRepoImpl implements AuthRepo {
       return const Right(null);
     } on CustomException catch (e) {
       return left((ServerFailure(errMessage: e.message)));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> changePassword(
+      {required String newPassword, required String currentPassword}) async {
+    {
+      try {
+        final result = await apiService.put(
+          EndPoints.changeMyPassword,
+          data: {
+            "currentPassword": currentPassword,
+            "password": newPassword,
+            "rePassword": newPassword
+          },
+        );
+        final String token = result['token'];
+        Prefs.setString(AppConstants.kToken, token);
+        return const Right(null);
+      } on CustomException catch (e) {
+        return left((ServerFailure(errMessage: e.message)));
+      }
     }
   }
 }

@@ -8,8 +8,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomFavorite extends StatefulWidget {
   final Data? product;
-     ProductsHiveService productsService = ProductsHiveService();
-   CustomFavorite({
+  final ProductsHiveService productsService = ProductsHiveService();
+  
+  CustomFavorite({
     super.key,
     required this.product,
   });

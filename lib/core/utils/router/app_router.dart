@@ -5,11 +5,14 @@ import 'package:e_commerce/features/auth/presentation/pages/forgot_password_page
 import 'package:e_commerce/features/auth/presentation/pages/login_page.dart';
 import 'package:e_commerce/features/auth/presentation/pages/reset_password_page.dart';
 import 'package:e_commerce/features/auth/presentation/pages/verification_code_page.dart';
+import 'package:e_commerce/features/changepassword/presentation/pages/change_password_page.dart';
+import 'package:e_commerce/features/editProfile/presentation/pages/edit_profile_page.dart';
 import 'package:e_commerce/features/favourites/presentation/pages/favorites_page.dart';
 import 'package:e_commerce/features/home/presentation/Pages/home_page.dart';
 import 'package:e_commerce/features/onBording/presentation/pages/on_bording_page.dart';
 import 'package:e_commerce/features/products/data/models/data_model.dart';
 import 'package:e_commerce/features/products/presentation/pages/product_details_view.dart';
+import 'package:e_commerce/features/profile/presentation/pages/profile_page.dart';
 import 'package:e_commerce/features/splash/presentation/pages/splash_page.dart';
 import 'package:go_router/go_router.dart';
 
@@ -93,6 +96,21 @@ class AppRouter {
         name: RoutesName.favorites,
         path: RoutesName.favorites,
         builder: (context, state) => const FavoritesPage(),
+      ),
+      GoRoute(
+        name: RoutesName.profile,
+        path: RoutesName.profile,
+        builder: (context, state) => const ProfilePage(),
+      ),
+      GoRoute(
+        name: RoutesName.changePassword,
+        path: RoutesName.changePassword,
+        builder: (context, state) => const ChangePasswordPage(),
+      ),
+      GoRoute(
+        name: RoutesName.editProfile,
+        path: RoutesName.editProfile,
+        builder: (context, state) => const EditProfilePage(),
       ),
     ],
   );

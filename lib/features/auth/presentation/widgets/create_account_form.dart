@@ -38,6 +38,7 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
     nameController = TextEditingController();
     phoneController = TextEditingController();
     confirmPasswordController = TextEditingController();
+
     super.initState();
   }
 
@@ -137,15 +138,15 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
       if (passwordController.text == confirmPasswordController.text) {
         CreateAccountRequestModel createAccountRequestModel =
             CreateAccountRequestModel(
-              name: nameController.text,
-              email: emailController.text,
-              password: passwordController.text,
-              rePassword: confirmPasswordController.text,
-              phone: phoneController.text,
-            );
-        context.read<CreateAccountCubit>().createAccount(
-          createAccountRequestModel: createAccountRequestModel,
+          name: nameController.text,
+          email: emailController.text,
+          password: passwordController.text,
+          rePassword: confirmPasswordController.text,
+          phone: phoneController.text,
         );
+        context.read<CreateAccountCubit>().createAccount(
+              createAccountRequestModel: createAccountRequestModel,
+            );
       } else {
         showSnackBarFuction(context, "password doesn't match", isError: true);
       }

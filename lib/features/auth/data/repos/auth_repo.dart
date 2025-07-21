@@ -1,4 +1,3 @@
-
 import 'package:dartz/dartz.dart';
 import 'package:e_commerce/core/errors/failure.dart';
 import 'package:e_commerce/features/auth/data/models/create_account_request_model.dart';
@@ -18,4 +17,7 @@ abstract class AuthRepo {
   Future<Either<Failure, void>> resetPassword({
     required String newPassword,
   });
+
+  Future<Either<Failure, void>> changePassword(
+      {required String newPassword, required String currentPassword});
 }

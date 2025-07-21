@@ -12,6 +12,8 @@ class AppAssets {
   static const String sliderImageTwo='assets/images/Property 1=Variant2.png';
   static const String imageNotFound ='assets/images/Image not found.jpeg';
   static const String sliderImageThree ='assets/images/Property 1=Default.png';
+  static const String profile ='assets/images/profile.jpg';
+  static const String changePass ='assets/images/change pass.png';
 
 }
 

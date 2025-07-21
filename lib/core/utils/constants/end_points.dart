@@ -9,6 +9,7 @@ abstract class EndPoints {
   static const String brands = "brands";
   static const String products = "products";
   static const String favorite = "wishlist";
+  static const String changeMyPassword = "users/changeMyPassword";
  
 
 }

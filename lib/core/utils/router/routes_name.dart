@@ -10,6 +10,7 @@ class RoutesName {
   static const String resetPassword = '/resetPassword';
   static const String productDetails = '/productDetails';
   static const String favorites = '/favorites';
-
-
+  static const String profile = '/profile';
+  static const String changePassword = '/changePassword';
+  static const String editProfile = '/editProfile';
 }

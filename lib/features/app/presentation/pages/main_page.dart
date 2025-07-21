@@ -6,6 +6,7 @@ import 'package:e_commerce/features/home/presentation/cubits/cubit_category/cate
 import 'package:e_commerce/features/home/presentation/widgets/custom_bottom_nav_bar.dart';
 import 'package:e_commerce/features/products/presentation/cubits/product_cubit/products_cubit.dart';
 import 'package:e_commerce/features/products/presentation/pages/product_page.dart';
+import 'package:e_commerce/features/profile/presentation/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -24,7 +25,7 @@ class _MainPageState extends State<MainPage> {
     HomePage(),
     ProductPage(),
     FavoritesPage(),
-    Center(child: Text("Profile")),
+    ProfilePage(),
   ];
 
   void onTap(int index) {
