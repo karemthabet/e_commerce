@@ -122,6 +122,7 @@ class AuthRepoImpl implements AuthRepo {
             "password": newPassword,
             "rePassword": newPassword
           },
+          headers: {"token": "${Prefs.getString(AppConstants.kToken)}"},
         );
         final String token = result['token'];
         Prefs.setString(AppConstants.kToken, token);
