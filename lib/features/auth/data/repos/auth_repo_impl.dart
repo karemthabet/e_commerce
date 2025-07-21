@@ -112,7 +112,7 @@ class AuthRepoImpl implements AuthRepo {
 
   @override
   Future<Either<Failure, void>> changePassword(
-      {required String newPassword, required String currentPassword}) async {
+      {required String newPassword, required String currentPassword ,required String rePassword}) async {
     {
       try {
         final result = await apiService.put(
@@ -120,7 +120,7 @@ class AuthRepoImpl implements AuthRepo {
           data: {
             "currentPassword": currentPassword,
             "password": newPassword,
-            "rePassword": newPassword
+            "rePassword": rePassword
           },
           headers: {"token": "${Prefs.getString(AppConstants.kToken)}"},
         );

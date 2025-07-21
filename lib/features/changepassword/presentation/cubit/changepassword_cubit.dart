@@ -11,13 +11,15 @@ class ChangePasswordCubit extends Cubit<ChangePasswordState> {
   ) : super(ChangepasswordInitial());
   final AuthRepo authRepo;
 
-  void changePassword({
-    required String currentPassword,
-    required String newPassword,
-  }) async {
+  void changePassword(
+      {required String currentPassword,
+      required String newPassword,
+      required String rePassword}) async {
     emit(ChangepasswordLoading());
     final result = await authRepo.changePassword(
-        newPassword: newPassword, currentPassword: currentPassword);
+        newPassword: newPassword,
+        currentPassword: currentPassword,
+        rePassword: rePassword);
     result.fold((failure) {
       emit(ChangepasswordError(error: failure.errMessage));
     }, (r) => emit(ChangepasswordSuccess()));

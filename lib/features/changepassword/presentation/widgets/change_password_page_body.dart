@@ -63,34 +63,17 @@ class _ChangePasswordPageBodyState extends State<ChangePasswordPageBody> {
                   ),
                   const SizedBox(height: 20),
                   PasswordField(
-                      hintText: "Current Password",
-                      controller: currentPassword,
-                      validator: (data) {
-                        if (data!.isEmpty) {
-                          return "password can't be empty";
-                        }
-                        return null;
-                      }),
+                    hintText: "Current Password",
+                    controller: currentPassword,
+                  ),
                   PasswordField(
-                      hintText: "New Password",
-                      controller: newPassword,
-                      validator: (data) {
-                        if (data!.isEmpty) {
-                          return "password can't be empty";
-                        }
-                        return null;
-                      }),
+                    hintText: "New Password",
+                    controller: newPassword,
+                  ),
                   PasswordField(
-                      hintText: "Re-Password",
-                      controller: rePassword,
-                      validator: (data) {
-                        if (data!.isEmpty) {
-                          return "password can't be empty";
-                        } else if (data != newPassword.text) {
-                          return "password doesn't match";
-                        }
-                        return null;
-                      }),
+                    hintText: "Re-Password",
+                    controller: rePassword,
+                  ),
                   BlocConsumer<ChangePasswordCubit, ChangePasswordState>(
                     listener: (context, state) {
                       if (state is ChangepasswordError) {
@@ -122,6 +105,7 @@ class _ChangePasswordPageBodyState extends State<ChangePasswordPageBody> {
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
                             context.read<ChangePasswordCubit>().changePassword(
+                                  rePassword: rePassword.text,
                                   currentPassword: currentPassword.text,
                                   newPassword: newPassword.text,
                                 );

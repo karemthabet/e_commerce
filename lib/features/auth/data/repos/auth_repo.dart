@@ -19,5 +19,5 @@ abstract class AuthRepo {
   });
 
   Future<Either<Failure, void>> changePassword(
-      {required String newPassword, required String currentPassword});
+      {required String newPassword, required String currentPassword ,required String rePassword});
 }
