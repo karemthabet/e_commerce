@@ -16,6 +16,7 @@ import 'package:e_commerce/features/home/presentation/cubits/cubit_category/cate
 import 'package:e_commerce/features/products/data/repos/product_repo.dart';
 import 'package:e_commerce/features/products/data/repos/product_repo_impl.dart';
 import 'package:e_commerce/features/products/presentation/cubits/product_cubit/products_cubit.dart';
+import 'package:e_commerce/features/profile/presentation/cubit/cubit/change_user_data_cubit.dart';
 import 'package:get_it/get_it.dart';
 
 import 'api_service.dart';
@@ -60,4 +61,5 @@ void setupServiceLocator() {
   getIt.registerFactory(() => BrandCubit(getIt.get<HomeRepo>()));
   getIt.registerFactory(() => FavoritesCubit(getIt.get<FavoritesRepo>()));
   getIt.registerFactory(() => ChangePasswordCubit(getIt.get<AuthRepo>()));
+  getIt.registerFactory(()=>ChangeUserDataCubit(getIt.get<AuthRepo>()) );
 }

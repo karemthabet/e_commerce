@@ -131,4 +131,24 @@ class AuthRepoImpl implements AuthRepo {
       }
     }
   }
-}
+  
+  @override
+  Future<Either<Failure, void>> changeUserData({required String newEmail, String? newName})async {
+    try {
+        await apiService.put(
+          EndPoints.changeUserData,
+          data: {
+            "email": newEmail,
+            "name": newName
+          },
+          headers: {"token": "${Prefs.getString(AppConstants.kToken)}"},
+        );
+        return const Right(null);
+      } on CustomException catch (e) {
+        return left((ServerFailure(errMessage: e.message)));
+      }
+    }
+  }
+  
+  
+

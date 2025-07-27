@@ -10,6 +10,7 @@ abstract class EndPoints {
   static const String products = "products";
   static const String favorite = "wishlist";
   static const String changeMyPassword = "users/changeMyPassword";
+  static const String changeUserData = "users/updateMe/";
  
 
 }

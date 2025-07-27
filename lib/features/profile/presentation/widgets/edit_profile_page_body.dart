@@ -1,9 +1,13 @@
+import 'package:e_commerce/core/functions/show_snack_bar_function.dart';
 import 'package:e_commerce/core/utils/assets/app_assets.dart';
 import 'package:e_commerce/core/utils/colors/app_colors.dart';
 import 'package:e_commerce/core/utils/styles/app_styles.dart';
 import 'package:e_commerce/core/widgets/custom_text_form_field.dart';
 import 'package:e_commerce/core/widgets/general_button.dart';
+import 'package:e_commerce/features/profile/presentation/cubit/cubit/change_user_data_cubit.dart';
+import 'package:e_commerce/features/profile/presentation/cubit/cubit/change_user_data_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class EditProfilePageBody extends StatefulWidget {
   const EditProfilePageBody({super.key});
@@ -64,10 +68,34 @@ class _EditProfilePageBodyState extends State<EditProfilePageBody> {
                     controller: emailController,
                     textInputType: TextInputType.emailAddress,
                   ),
-                  const GeneralButton(
-                    text: "Update",
-                    textColor: AppColors.whiteColor,
-                    backgroundColor: AppColors.blueAccentColor,
+                  BlocConsumer<ChangeUserDataCubit, ChangeUserDataState>(
+                    listener: (context, state) {
+                      if (state is ChangeUserDataError) {
+                        showSnackBarFuction(context, state.errorMessage,
+                            isError: true);
+                      }
+                      if (state is ChangeUserDataSuccess) {
+                        showSnackBarFuction(context,"update successfully",
+                            isError: false);
+                      }
+                    },
+                    builder: (context, state) {
+                      if (state is ChangeUserDataLoading) {
+                        return const Center(
+                          child: CircularProgressIndicator(
+                            color: AppColors.blueAccentColor,
+                          ),
+                        );
+                      }
+                      return  GeneralButton(
+                        onPressed: (){
+                          _handleUpdateUserDataRequest(context);
+                        },
+                        text: "Update",
+                        textColor: AppColors.whiteColor,
+                        backgroundColor: AppColors.blueAccentColor,
+                      );
+                    },
                   )
                 ],
               ),
@@ -75,4 +103,20 @@ class _EditProfilePageBodyState extends State<EditProfilePageBody> {
           ),
         ));
   }
+  
+  void _handleUpdateUserDataRequest(BuildContext context) {
+    if (formKey.currentState!.validate()) {
+      context.read<ChangeUserDataCubit>().changeUserData(
+        newEmail: emailController.text,
+        newName: nameController.text,
+      );
+    }
+    else{
+      setState(() {
+        autovalidateMode = AutovalidateMode.always;
+      });
+    }
+  }
+
+ 
 }
