@@ -133,5 +133,4 @@ void _handleUpdateUserDataRequest(BuildContext context) {
     });
   }
 }
-
 }
