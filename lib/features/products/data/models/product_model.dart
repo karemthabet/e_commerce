@@ -19,15 +19,15 @@ class ProductsModel  extends HiveObject{
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["results"] = results;
+    final Map<String, dynamic> jsonData = <String, dynamic>{};
+    jsonData["results"] = results;
     if (metadata != null) {
-      _data["metadata"] = metadata!.toJson();
+      jsonData["metadata"] = metadata!.toJson();
     }
     if (data != null) {
-      _data["data"] = data!.map((e) => e.toJson()).toList();
+      jsonData["data"] = data!.map((e) => e.toJson()).toList();
     }
-    return _data;
+    return jsonData;
   }
 }
 

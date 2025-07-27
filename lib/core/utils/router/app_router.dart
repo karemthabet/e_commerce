@@ -5,6 +5,7 @@ import 'package:e_commerce/features/auth/presentation/pages/forgot_password_page
 import 'package:e_commerce/features/auth/presentation/pages/login_page.dart';
 import 'package:e_commerce/features/auth/presentation/pages/reset_password_page.dart';
 import 'package:e_commerce/features/auth/presentation/pages/verification_code_page.dart';
+import 'package:e_commerce/features/profile/presentation/cubit/cubit/change_user_data_cubit.dart';
 import 'package:e_commerce/features/profile/presentation/pages/change_password_page.dart';
 import 'package:e_commerce/features/profile/presentation/pages/edit_profile_page.dart';
 import 'package:e_commerce/features/favourites/presentation/pages/favorites_page.dart';
@@ -108,9 +109,15 @@ class AppRouter {
         builder: (context, state) => const ChangePasswordPage(),
       ),
       GoRoute(
+
         name: RoutesName.editProfile,
         path: RoutesName.editProfile,
-        builder: (context, state) => const EditProfilePage(),
+        builder: (context, state) {
+          
+          return  EditProfilePage(
+            changeUserDataCubit: state.extra as ChangeUserDataCubit,
+          );
+        },
       ),
     ],
   );

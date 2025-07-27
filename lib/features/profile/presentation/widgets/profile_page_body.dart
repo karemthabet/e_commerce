@@ -3,8 +3,11 @@ import 'package:e_commerce/core/utils/assets/app_assets.dart';
 import 'package:e_commerce/core/utils/constants/app_constants.dart';
 import 'package:e_commerce/core/utils/router/routes_name.dart';
 import 'package:e_commerce/core/utils/styles/app_styles.dart';
+import 'package:e_commerce/features/profile/presentation/cubit/cubit/change_user_data_cubit.dart';
+import 'package:e_commerce/features/profile/presentation/cubit/cubit/change_user_data_state.dart';
 import 'package:e_commerce/features/profile/presentation/widgets/build_profile_options.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class ProfilePageBody extends StatelessWidget {
@@ -12,10 +15,6 @@ class ProfilePageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String userName = Prefs.getString(AppConstants.kUserName)!;
-    String email =
-        Prefs.getString(AppConstants.kForgottenEmail) !;
-
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 50),
@@ -32,32 +31,43 @@ class ProfilePageBody extends StatelessWidget {
                   AssetImage(AppAssets.profile), // غيّرها حسب صورتك
             ),
             const SizedBox(height: 20),
-            Text(
-              userName,
-              style: AppStyles.text20
-                  .copyWith(fontWeight: FontWeight.bold, fontSize: 30),
+            BlocBuilder<ChangeUserDataCubit, ChangeUserDataState>(
+              builder: (context, state) {
+                String userName = Prefs.getString(AppConstants.kUserName)!;
+                String email = Prefs.getString(AppConstants.kForgottenEmail)!;
+
+                return Column(
+                  children: [
+                    Text(
+                      userName,
+                      style: AppStyles.text20
+                          .copyWith(fontWeight: FontWeight.bold, fontSize: 30),
+                    ),
+                    const SizedBox(height: 5),
+                    Text(
+                      email,
+                      style: AppStyles.text15,
+                    ),
+                  ],
+                );
+              },
             ),
             const SizedBox(height: 5),
-            Text(
-              email,
-              style: AppStyles.text15,
-            ),
-            const SizedBox(height: 5),
-            
             const SizedBox(height: 30),
             BuildProfileOptions(
               icon: Icons.edit,
               title: 'Edit Profile',
               onTap: () {
-                context.push(RoutesName.editProfile);
+                context.push(
+                  RoutesName.editProfile,
+                  extra: context.read<ChangeUserDataCubit>(),
+                );
               },
             ),
             BuildProfileOptions(
               icon: Icons.shopping_bag,
               title: 'My Orders',
-              onTap: () {
-                
-              },
+              onTap: () {},
             ),
             BuildProfileOptions(
               icon: Icons.lock,
@@ -78,6 +88,5 @@ class ProfilePageBody extends StatelessWidget {
         ),
       ),
     );
-  
   }
 }

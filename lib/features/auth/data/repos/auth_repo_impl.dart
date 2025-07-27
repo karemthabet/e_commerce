@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-
 import 'package:e_commerce/core/cache/prefs.dart';
 import 'package:e_commerce/core/errors/failure.dart';
 import 'package:e_commerce/core/utils/constants/app_constants.dart';
@@ -7,13 +6,10 @@ import 'package:e_commerce/core/utils/constants/end_points.dart';
 import 'package:e_commerce/features/auth/data/models/create_account_request_model.dart';
 import 'package:e_commerce/features/auth/data/models/login_request_model.dart';
 import 'package:e_commerce/features/auth/data/repos/auth_repo.dart';
-
 import '../../../../core/errors/exception.dart';
 import '../../../../core/services/api_service.dart';
-
 class AuthRepoImpl implements AuthRepo {
   final ApiService apiService;
-
   AuthRepoImpl({required this.apiService});
   @override
   Future<Either<Failure, void>> createAccount({
@@ -36,7 +32,6 @@ class AuthRepoImpl implements AuthRepo {
       return left((ServerFailure(errMessage: e.message)));
     }
   }
-
   @override
   Future<Either<Failure, void>> login({
     required LoginRequestModel loginRequestModel,
@@ -58,7 +53,6 @@ class AuthRepoImpl implements AuthRepo {
       return left((ServerFailure(errMessage: e.message)));
     }
   }
-
   @override
   Future<Either<Failure, void>> forgotPassword({
     required String email,
@@ -74,7 +68,6 @@ class AuthRepoImpl implements AuthRepo {
       return left((ServerFailure(errMessage: e.message)));
     }
   }
-
   @override
   Future<Either<Failure, void>> verfiyCode({required String code}) async {
     try {
@@ -111,7 +104,9 @@ class AuthRepoImpl implements AuthRepo {
 
   @override
   Future<Either<Failure, void>> changePassword(
-      {required String newPassword, required String currentPassword ,required String rePassword}) async {
+      {required String newPassword,
+      required String currentPassword,
+      required String rePassword}) async {
     {
       try {
         final result = await apiService.put(
@@ -131,24 +126,42 @@ class AuthRepoImpl implements AuthRepo {
       }
     }
   }
-  
   @override
-  Future<Either<Failure, void>> changeUserData({required String newEmail, String? newName})async {
-    try {
-        await apiService.put(
-          EndPoints.changeUserData,
-          data: {
-            "email": newEmail,
-            "name": newName
-          },
-          headers: {"token": "${Prefs.getString(AppConstants.kToken)}"},
-        );
-        return const Right(null);
-      } on CustomException catch (e) {
-        return left((ServerFailure(errMessage: e.message)));
-      }
-    }
+  Future<Either<Failure, void>> changeUserData({
+  String? newEmail,
+  String? newName,
+}) async {
+ Map<String,dynamic> requestdata={};
+  if(newEmail==null && newName==null){
+    requestdata={};
   }
-  
-  
+  if(newEmail!=null && newName==null){
+    requestdata={"email":newEmail};
+  }
+  if(newEmail==null && newName!=null){
+    requestdata={"name":newName};
+  }
+  if(newEmail!=null && newName!=null){
+    requestdata={"email":newEmail,"name":newName};
+  }
+ 
 
+  try {
+ final result =   await apiService.put(
+      EndPoints.changeUserData,
+      data: requestdata,
+      headers: {
+        "token": "${Prefs.getString(AppConstants.kToken)}",
+      },
+    );
+    Prefs.setString(AppConstants.kForgottenEmail, result["user"]["email"]);
+    Prefs.setString(AppConstants.kUserName, result['user']['name']);
+
+    return const Right(null);
+  } on CustomException catch (e) {
+    return Left(ServerFailure(errMessage: e.message));
+  } catch (e) {
+    return Left(ServerFailure(errMessage: 'Unexpected error'));
+  }
+}
+}

@@ -7,7 +7,6 @@ final class ChangeUserDataLoading extends ChangeUserDataState {}
 final class ChangeUserDataSuccess extends ChangeUserDataState {}
 
 final class ChangeUserDataError extends ChangeUserDataState {
-  String errorMessage;
-
+  final String errorMessage;
   ChangeUserDataError({required this.errorMessage});
 }
